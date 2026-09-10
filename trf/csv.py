@@ -40,7 +40,7 @@ def parse_registrants(csv_file: str) -> list[Player]:
             result.append(Player(
                 row[Registrants.FIRST_NAME],
                 row[Registrants.LAST_NAME],
-                row[Registrants.RATING],
+                row[Registrants.RATING] if len(row) > Registrants.RATING else '',
                 row[Registrants.CLUB],
             ))
         return result
