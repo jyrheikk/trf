@@ -44,5 +44,4 @@ uv run -m trf --players players.csv --tournament my_tournament.trf --group_ends 
 - Log in to ChessManager.
 - Select **New Tournament**.
 - Select **Import From File**, and choose the generated TRF file.
-- Update tournament time control.
 - Add the club for each player if needed.
