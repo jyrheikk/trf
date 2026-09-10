@@ -13,7 +13,7 @@ def main(args: argparse.Namespace) -> None:
     if args.download_ratings:
         download_ratings()
     elif args.players:
-        create_players_trfx(args.players)
+        create_players_trf(args.players)
 
 def download_ratings():
     url = f'https://www.shakki.net/selo/{RATINGS_FILE}'
@@ -24,7 +24,7 @@ def download_ratings():
     with open(RATINGS_FILE, 'w', encoding='utf-8') as outfile:
         outfile.write(content)
 
-def create_players_trfx(players_file) -> None:
+def create_players_trf(players_file) -> None:
     registrants = parse_registrants(players_file)
     print(f'#registrants: {len(registrants)}')
     rated_players = parse_rated_players()

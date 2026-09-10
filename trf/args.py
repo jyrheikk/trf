@@ -25,8 +25,8 @@ def parse_args(argv = None) -> argparse.Namespace:
     create.add_argument(
         '-t', '--tournament',
         type=str,
-        metavar='TOURNAMENT_TRFX',
-        help='name of the Tournament Report File (.trfx)'
+        metavar='TOURNAMENT_TRF',
+        help='name of the Tournament Report File (.trf)'
     )
 
     return parser.parse_args(argv)
