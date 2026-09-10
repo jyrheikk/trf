@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - Create an account in [ChessManager](https://chessmanager.com/).
+- Copy the code of this GitHub repository, select **Code** – Download ZIP.
 - [Install `uv`](https://docs.astral.sh/uv/getting-started/installation/), used for running the scripts below.
 
 ## Creating a tournament
@@ -26,16 +27,22 @@ Example:
 Jyrki,Heikkinen,2064
 ```
 
-4. Generate the tournament file that includes a list of participants:
+4. Verify that all the registrants are found from the ratings list:
 
 ```bash
-uv run -m trf --tournament tournament.trf --players players.csv
+uv run -m trf --players players.csv
 ```
 
-5. Create a tournament:
+5. Generate one or more tournament files, and divide players into them:
+
+```bash
+uv run -m trf --players players.csv --tournament my_tournament.trf --group_ends 10 24 38
+```
+
+6. Create tournaments:
 
 - Log in to ChessManager.
 - Select **New Tournament**.
 - Select **Import From File**, and choose the generated TRF file.
 - Update tournament time control.
-- Add the club for players if needed, by manually updating the players.
+- Add the club for each player if needed.
