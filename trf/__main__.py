@@ -2,7 +2,6 @@
 
 import argparse
 import urllib.request
-import sys
 
 from trf.args import RATINGS_FILE, parse_args, validate_args
 from trf.csv import parse_rated_players, parse_registrants
@@ -35,10 +34,9 @@ def create_players_trf(players_file) -> None:
         if player:
             players.append(player)
         else:
-            print(f'❌ Registrant not found: {reg.last_name}, {reg.first_name} ({reg.club})')
-    if len(players) < len(registrants):
-        print('🛠️  Correct the list of registrants')
-        sys.exit(1)
+            club = '({reg.club})' if reg.club else ''
+            print(f'⚠️  Check if this is a new player: {reg.last_name}, {reg.first_name} {club}')
+            players.append(Player(reg.first_name, reg.last_name))
     sorted_players = sorted(players, key=lambda p: p.rating, reverse=True)
     trf = create_players(sorted_players)
     print('\n'.join(trf))

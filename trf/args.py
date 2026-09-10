@@ -17,6 +17,13 @@ def parse_args(argv = None) -> argparse.Namespace:
 
     create = parser.add_argument_group('create')
     create.add_argument(
+        '-g', '--groups',
+        type=str,
+        metavar='INDEX',
+        nargs='*',
+        help='indexes of the last player in each group'
+    )
+    create.add_argument(
         '-p', '--players',
         type=str,
         metavar='PLAYERS_CSV',
