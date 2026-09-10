@@ -1,5 +1,9 @@
 import argparse
 
+DEFAULT_TOURNAMENT_FILE = 'tournament.trf'
+
+DEFAULT_PLAYERS_FILE = 'players.csv'
+
 RATINGS_FILE = 'selolista.csv'
 
 def parse_args(argv = None) -> argparse.Namespace:
@@ -18,7 +22,7 @@ def parse_args(argv = None) -> argparse.Namespace:
     create = parser.add_argument_group('create')
     create.add_argument(
         '-g', '--groups',
-        type=str,
+        type=int,
         metavar='INDEX',
         nargs='*',
         help='indexes of the last player in each group'
@@ -27,13 +31,15 @@ def parse_args(argv = None) -> argparse.Namespace:
         '-p', '--players',
         type=str,
         metavar='PLAYERS_CSV',
-        help='name of the players CSV file'
+        default=DEFAULT_PLAYERS_FILE,
+        help=f'name of the players CSV file (default {DEFAULT_PLAYERS_FILE})'
     )
     create.add_argument(
         '-t', '--tournament',
         type=str,
         metavar='TOURNAMENT_TRF',
-        help='name of the Tournament Report File (.trf)'
+        default=DEFAULT_TOURNAMENT_FILE,
+        help=f'name of the Tournament Report File (default {DEFAULT_TOURNAMENT_FILE})'
     )
 
     return parser.parse_args(argv)

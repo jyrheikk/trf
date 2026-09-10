@@ -5,14 +5,14 @@ import urllib.request
 
 from trf.args import RATINGS_FILE, parse_args, validate_args
 from trf.csv import parse_rated_players, parse_registrants
-from trf.trf import create_players
+from trf.trf import create_players, create_trf
 from trf.player import Player
 
 def main(args: argparse.Namespace) -> None:
     if args.download_ratings:
         download_ratings()
-    elif args.players:
-        create_players_trf(args.players)
+    else:
+        create_players_trf(args)
 
 def download_ratings():
     url = f'https://www.shakki.net/selo/{RATINGS_FILE}'
@@ -23,11 +23,20 @@ def download_ratings():
     with open(RATINGS_FILE, 'w', encoding='utf-8') as outfile:
         outfile.write(content)
 
-def create_players_trf(players_file) -> None:
-    registrants = parse_registrants(players_file)
+def create_players_trf(args: argparse.Namespace) -> None:
+    registrants = parse_registrants(args.players)
     print(f'#registrants: {len(registrants)}')
     rated_players = parse_rated_players()
     print(f'#players in selolista: {len(rated_players)}')
+    sorted_players = get_sorted_players(registrants, rated_players)
+    if (args.groups):
+        create_trf(sorted_players, args.groups, args.tournament or None)
+    else:
+        trf = create_players(sorted_players)
+        print('\n'.join(trf))
+        print('add the indexes of the last player in each group (--groups 12 24)')
+
+def get_sorted_players(registrants: list[Player], rated_players: list[Player]) -> list[Player]:
     players = []
     for reg in registrants:
         player = search_player(reg, rated_players)
@@ -37,10 +46,7 @@ def create_players_trf(players_file) -> None:
             club = '({reg.club})' if reg.club else ''
             print(f'⚠️  Check if this is a new player: {reg.last_name}, {reg.first_name} {club}')
             players.append(Player(reg.first_name, reg.last_name))
-    sorted_players = sorted(players, key=lambda p: p.rating, reverse=True)
-    trf = create_players(sorted_players)
-    print('\n'.join(trf))
-    print('✅ TRF created')
+    return sorted(players, key=lambda p: p.rating, reverse=True)
 
 def search_player(registrant: Player, rated_players: list[Player]) -> Player:
     for rated in rated_players:
