@@ -1,4 +1,4 @@
-DEFAULT_RATING = 1525
+DEFAULT_RATING = '1525'
 
 class Player:
     def __init__(self, first_name: str, last_name: str, rating = DEFAULT_RATING, club = ''):
