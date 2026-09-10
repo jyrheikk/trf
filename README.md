@@ -13,7 +13,7 @@
 uv run -m trf --download-ratings
 ```
 
-2. Create the [Tournament Report File](https://tornelo.com/knowledge-base/trfx-file-format/) based on `tournament.trfx`.
+2. Create the [Tournament Report File](https://tornelo.com/knowledge-base/trfx-file-format/) based on `tournament.trf`.
 
 3. Create the `players.csv` file that contains the participants:
 
@@ -29,13 +29,13 @@ Jyrki,Heikkinen,2064
 4. Generate the tournament file that includes a list of participants:
 
 ```bash
-uv run -m trf --tournament tournament.trfx --players players.csv
+uv run -m trf --tournament tournament.trf --players players.csv
 ```
 
 5. Create a tournament:
 
 - Log in to ChessManager.
 - Select **New Tournament**.
-- Select **Import From File**, and choose the generated TRFX file.
+- Select **Import From File**, and choose the generated TRF file.
 - Update tournament time control.
 - Add the club for players if needed, by manually updating the players.
