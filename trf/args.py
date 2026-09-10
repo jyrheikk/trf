@@ -21,7 +21,7 @@ def parse_args(argv = None) -> argparse.Namespace:
 
     create = parser.add_argument_group('create')
     create.add_argument(
-        '-g', '--groups',
+        '-g', '--group_ends',
         type=int,
         metavar='INDEX',
         nargs='*',

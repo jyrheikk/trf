@@ -29,12 +29,12 @@ def create_players_trf(args: argparse.Namespace) -> None:
     rated_players = parse_rated_players()
     print(f'#players in selolista: {len(rated_players)}')
     sorted_players = get_sorted_players(registrants, rated_players)
-    if (args.groups):
-        create_trf(sorted_players, args.groups, args.tournament or None)
+    if (args.group_ends):
+        create_trf(sorted_players, args.group_ends, args.tournament or None)
     else:
         trf = create_players(sorted_players)
         print('\n'.join(trf))
-        print('add the indexes of the last player in each group (--groups 12 24)')
+        print('add the indexes of the last player in each group (--group_ends 12 24)')
 
 def get_sorted_players(registrants: list[Player], rated_players: list[Player]) -> list[Player]:
     players = []

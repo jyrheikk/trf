@@ -1,14 +1,12 @@
-from trf.args import DEFAULT_TOURNAMENT_FILE
-
 from trf.player import Player
 
 TRF_PLAYER_ID = '001'
 
-def create_trf(players: list[Player], last_players: list[int], tournament: str) -> None:
+def create_trf(players: list[Player], group_ends: list[int], tournament: str) -> None:
     with open(tournament) as file:
         tournament_info = file.read()
     first_player = 0
-    for index, last_player in enumerate(last_players):
+    for index, last_player in enumerate(group_ends):
         filename = f'tournament-{index + 1}.trf'
         with open(filename, 'w', encoding='utf-8') as outfile:
             group_players = players[first_player:last_player]
