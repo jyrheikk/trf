@@ -3,10 +3,9 @@
 032 FIN
 042 2026/10/03
 052 2026/10/04
-092 Individual: Swiss-System
+092 Swiss-System
 102 Jyrki Heikkinen
-122 Standard: 90min + 30sec increment per move starting from move 1
-142 4
+122 Standard: 90min +30sec increment per move starting from move 1
 152 B
 172 FIN FIDON
 182 ChessManager
