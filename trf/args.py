@@ -1,5 +1,6 @@
 import argparse
-import sys
+
+from trf.log import fatal
 
 DEFAULT_TOURNAMENT_FILE = 'tournament.trf'
 
@@ -51,7 +52,7 @@ def validate_args(args: argparse.Namespace) -> argparse.Namespace:
         sorted_values = to_str(sorted_arr)
         values = to_str(args.group_ends)
         if sorted_values != values:
-            sys.exit(f'❌ give arguments in the ascending order: --group_ends {values}')
+            fatal(f'Give arguments in the ascending order: --group_ends {values}')
 
     return args
 

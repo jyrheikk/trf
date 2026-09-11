@@ -1,3 +1,4 @@
+from trf.log import ok
 from trf.player import Player
 
 TRF_PLAYER_ID = '001'
@@ -15,7 +16,7 @@ def create_trf(players: list[Player], group_ends: list[int], tournament: str) ->
             outfile.write('\n')
             outfile.write('\n'.join(players_trf))
             outfile.write('\n')
-            print(f'✅ created {filename} ({last_player - first_player} players)')
+            ok(f'Created {filename} ({last_player - first_player} players)')
             first_player = last_player
 
 def create_players(players: list[Player]) -> str:
