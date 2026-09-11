@@ -1,6 +1,7 @@
 import sys
 
 ERROR = '❌'
+INFO = 'ℹ️' # noqa
 OK = '✅'
 TODO = '🛠️'
 WARN = '⚠️️'
@@ -10,6 +11,9 @@ def fatal(msg: str) -> None:
 
 def ok(msg: str) -> None:
     print(f'{OK}  {msg}')
+
+def info(msg: str) -> None:
+    print(f'{INFO}  {msg}')
 
 def todo(msg: str) -> None:
     print(f'{TODO}  {msg}')
