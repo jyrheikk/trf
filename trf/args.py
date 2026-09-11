@@ -2,11 +2,13 @@ import argparse
 
 from trf.log import fatal
 
-DEFAULT_TOURNAMENT_FILE = 'tournament.trf'
+INPUT_DIR = 'input'
 
-DEFAULT_PLAYERS_FILE = 'players.csv'
+DEFAULT_TOURNAMENT_FILE = f'{INPUT_DIR}/tournament.trf'
 
-RATINGS_FILE = 'selolista.csv'
+DEFAULT_PLAYERS_FILE = f'{INPUT_DIR}/players.csv'
+
+RATINGS_FILE = f'{INPUT_DIR}/selolista.csv'
 
 def parse_args(argv = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -23,7 +25,7 @@ def parse_args(argv = None) -> argparse.Namespace:
 
     create = parser.add_argument_group('create')
     create.add_argument(
-        '-g', '--group_ends',
+        '-g', '--group-ends',
         type=int,
         metavar='INDEX',
         nargs='*',

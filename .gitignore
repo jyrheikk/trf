@@ -3,3 +3,5 @@
 !tournament.trf
 .coverage
 __pycache__
+input
+output

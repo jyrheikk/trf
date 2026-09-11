@@ -16,7 +16,7 @@ def main(args: argparse.Namespace) -> None:
         create_players_trf(args)
 
 def download_ratings():
-    url = f'https://www.shakki.net/selo/{RATINGS_FILE}'
+    url = 'https://www.shakki.net/selo/selolista.csv'
 
     with urllib.request.urlopen(url) as response:
         content = response.read().decode('latin-1')
@@ -27,7 +27,7 @@ def download_ratings():
 def create_players_trf(args: argparse.Namespace) -> None:
     registrants = parse_registrants(args.players)
     print(f'#registrants: {len(registrants)}')
-    rated_players = parse_rated_players()
+    rated_players = parse_rated_players(RATINGS_FILE)
     print(f'#players in selolista: {len(rated_players)}')
     sorted_players = get_sorted_players(registrants, rated_players)
     if (args.group_ends):
@@ -35,7 +35,7 @@ def create_players_trf(args: argparse.Namespace) -> None:
     else:
         trf = create_players(sorted_players)
         print('\n'.join(trf))
-        todo('Add the indexes of the last player in each group (--group_ends 12 24)')
+        todo('Add the indexes of the last player in each group (--group-ends 12 24)')
 
 def get_sorted_players(registrants: list[Player], rated_players: list[Player]) -> list[Player]:
     players = []

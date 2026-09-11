@@ -1,9 +1,8 @@
 import csv
 
-from trf.args import RATINGS_FILE
 from trf.player import Player
 
-def parse_rated_players(filename = RATINGS_FILE) -> list[Player]:
+def parse_rated_players(filename: str) -> list[Player]:
     number_of_extra_fields = 3
     return __parse_csv(filename, ';', number_of_extra_fields)
 
