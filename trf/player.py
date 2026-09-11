@@ -1,3 +1,5 @@
+from trf.search import binary_search
+
 DEFAULT_RATING = '1525'
 
 class Player:
@@ -8,3 +10,11 @@ class Player:
         self.club = club
         club_info = f'({club.lower()})' if club else ''
         self.search_name = f'{last_name.lower()}, {first_name.lower()} {club_info}'
+
+    def search(self, players: list[Player]) -> Player:
+        i = binary_search(
+            players,
+            self.search_name,
+            key=lambda x: x.search_name
+        )
+        return players[i]
