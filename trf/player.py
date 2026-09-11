@@ -1,3 +1,5 @@
+import re
+
 DEFAULT_RATING = '1525'
 
 class Player:
@@ -8,11 +10,9 @@ class Player:
         self.club = club
 
     def equals(self, a: Player) -> bool:
-        return self.last_name == a.last_name and \
-            self.first_name == a.first_name and \
-            (self.club == a.club or not self.club or not a.club)
+        return equals(self.last_name, a.last_name) and \
+            equals(self.first_name, a.first_name) and \
+            (equals(self.club, a.club) or not self.club or not a.club)
 
-    def old_equals(self, a: Player) -> bool:
-        return self['last_name'] == a['last_name'] and \
-            self['first_name'] == a['first_name'] and \
-            (self['club'] == a['club'] or not self['club'] or not a['club'])
+def equals(a: str, b: str) -> bool:
+    return re.match(a, b, re.IGNORECASE)
