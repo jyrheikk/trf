@@ -14,18 +14,23 @@
 uv run -m trf --download-ratings
 ```
 
-2. Create the [Tournament Report File](https://tornelo.com/knowledge-base/trfx-file-format/) based on `tournament.trf`.
+2. Create your customized [Tournament Report File](https://tornelo.com/knowledge-base/trfx-file-format/) based on `tournament.trf`.
 
-3. Create the `players.csv` file that contains the participants:
-
-- One each line.
-- Format is `first-name,last-name,club`.
-
-Example:
+3. Create the `players.csv` file that contains the participants one per line:
 
 ```csv
-Jyrki,Heikkinen,2064
+last-name,first-name,club
+Carlsen,Magnus,2823
+Heikkinen,Jyrki,2062
 ```
+
+The following data in the file are ignored:
+- The first line, which should be a header.
+- Extra fields after the `club` field.
+
+For example, if registrations are in Google Sheet,
+- export them as CSV, and
+- verify that the order of fields is correct.
 
 4. Verify that all the registrants are found from the ratings list:
 
@@ -33,11 +38,15 @@ Jyrki,Heikkinen,2064
 uv run -m trf --players players.csv
 ```
 
-5. Generate one or more tournament files, and divide players into them:
+Fix the player data in `players.csv` if needed. Player names are case-insensitive.
+
+5. Generate one or more tournament files, and divide the players into them:
 
 ```bash
 uv run -m trf --players players.csv --tournament my_tournament.trf --group_ends 10 24 38
 ```
+
+The numbers after the `group_ends` argument are the **indexes of the last player** in each group.
 
 6. Create tournaments:
 
