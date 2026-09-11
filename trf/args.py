@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 DEFAULT_TOURNAMENT_FILE = 'tournament.trf'
 
@@ -45,4 +46,14 @@ def parse_args(argv = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 def validate_args(args: argparse.Namespace) -> argparse.Namespace:
+    if args.group_ends:
+        sorted_arr = sorted(args.group_ends, key=int)
+        sorted_values = to_str(sorted_arr)
+        values = to_str(args.group_ends)
+        if sorted_values != values:
+            sys.exit(f'❌ give arguments in the ascending order: --group_ends {values}')
+
     return args
+
+def to_str(arr: list[int]) -> str:
+    return ' '.join(map(str, arr))
