@@ -1,5 +1,3 @@
-import re
-
 DEFAULT_RATING = '1525'
 
 class Player:
@@ -8,11 +6,5 @@ class Player:
         self.last_name = last_name
         self.rating = rating
         self.club = club
-
-    def equals(self, a: Player) -> bool:
-        return equals(self.last_name, a.last_name) and \
-            equals(self.first_name, a.first_name) and \
-            (equals(self.club, a.club) or not self.club or not a.club)
-
-def equals(a: str, b: str) -> bool:
-    return re.match(a, b, re.IGNORECASE)
+        club_info = f'({club.lower()})' if club else ''
+        self.search_name = f'{last_name.lower()}, {first_name.lower()} {club_info}'
