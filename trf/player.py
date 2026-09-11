@@ -17,4 +17,4 @@ class Player:
             self.search_name,
             key=lambda x: x.search_name
         )
-        return players[i]
+        return players[i] if i > -1 else None
