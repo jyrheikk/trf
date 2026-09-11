@@ -11,7 +11,7 @@
 1. Download the latest ratings list in the `input/selolista.csv` file:
 
 ```bash
-uv run -m trf --download-ratings
+./trfx -d
 ```
 
 2. Create your customized [Tournament Report File](https://tornelo.com/knowledge-base/trfx-file-format/) named `input/tournament.trf` based on the `tournament.trf` template.
@@ -35,7 +35,7 @@ For example, if registrations are in Google Sheet,
 4. Verify that all the registrants are found from the ratings list:
 
 ```bash
-uv run -m trf
+./trfx
 ```
 
 Fix the player data in `input/players.csv` manually if needed. The player names are case-insensitive.
@@ -45,10 +45,10 @@ Fix the player data in `input/players.csv` manually if needed. The player names 
 1. Generate one or more Tournament Report Files in `output/tournament-*.trf`, and divide the players into them:
 
 ```bash
-uv run -m trf --group-ends 10 24 38
+./trfx -g 10 24 38
 ```
 
-The numbers after the `group-ends` argument are the **indexes of the last player** in each group.
+The numbers after the `g` argument are the **indexes of the last player** in each group.
 
 2. Create tournaments:
 

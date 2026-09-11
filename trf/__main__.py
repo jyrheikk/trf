@@ -25,7 +25,7 @@ def create_players_trf(args: argparse.Namespace) -> None:
         trf = create_players(players)
         print('\n'.join(trf))
         check_new_players(players)
-        info('Create TRF: add the last player index of each group (--group-ends 12 24)')
+        info('Create TRF: add the last player index of each group (-g 12 24)')
 
 def check_new_players(players: list[Player]) -> None:
     for p in players:
