@@ -16,29 +16,21 @@ def main(args: argparse.Namespace) -> None:
         create_players_trf(args)
 
 def create_players_trf(args: argparse.Namespace) -> None:
+    rated_players = RatedPlayers()
     registrants = parse_registrants(args.players)
-    info(f'#registrants: {len(registrants)}')
-    rated_players = RatedPlayers.parse()
-    info(f'#players in selolista: {len(rated_players)}')
-    players = get_all_players(registrants, rated_players)
-    sorted_players = RatedPlayers.sort_by_rating(players)
+    players = rated_players.search_all(registrants)
     if (args.group_ends):
-        create_trf(sorted_players, args.group_ends, args.tournament or None)
+        create_trf(players, args.group_ends, args.tournament or None)
     else:
-        trf = create_players(sorted_players)
+        trf = create_players(players)
         print('\n'.join(trf))
+        check_new_players(players)
         info('Create TRF: add the last player index of each group (--group-ends 12 24)')
 
-def get_all_players(registrants: list[Player], rated_players: list[Player]) -> list[Player]:
-    players = []
-    for reg in registrants:
-        player = reg.search(rated_players)
-        if player:
-            players.append(player)
-        else:
-            warn(f'Check if this is a new player: {reg.search_name}')
-            players.append(Player(reg.first_name, reg.last_name))
-    return players
+def check_new_players(players: list[Player]) -> None:
+    for p in players:
+        if p.is_new:
+            warn(f'Check if this is a new player: {p.search_name}')
 
 if __name__ == '__main__':
     main(validate_args(parse_args()))

@@ -10,6 +10,10 @@ class Player:
         self.club = club
         club_info = f'({club.lower()})' if club else ''
         self.search_name = f'{last_name.lower()}, {first_name.lower()} {club_info}'
+        self.is_new = False
+
+    def set_new(self) -> None:
+        self.is_new = True
 
     def search(self, players: list[Player]) -> Player:
         i = binary_search(
