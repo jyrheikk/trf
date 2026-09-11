@@ -13,10 +13,8 @@ class RatedPlayers:
         for reg in registrants:
             player = reg.search(self.players)
             if player:
-                print(f'FOUND: {player}')
                 found.append(player)
             else:
-                print('NOT FOUND')
                 p = Player(reg.first_name, reg.last_name)
                 p.set_new()
                 found.append(p)
