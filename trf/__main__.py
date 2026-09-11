@@ -1,36 +1,27 @@
 #!/usr/bin/env python3
 
 import argparse
-import urllib.request
 
-from trf.args import RATINGS_FILE, parse_args, validate_args
-from trf.csv import parse_rated_players, parse_registrants
+from trf.args import parse_args, validate_args
+from trf.csv import parse_registrants
 from trf.log import info, warn
 from trf.player import Player
+from trf.rated_players import RatedPlayers
 from trf.trf import create_players, create_trf
 
 def main(args: argparse.Namespace) -> None:
     if args.download_ratings:
-        download_ratings()
+        RatedPlayers.download()
     else:
         create_players_trf(args)
 
-def download_ratings():
-    url = 'https://www.shakki.net/selo/selolista.csv'
-
-    with urllib.request.urlopen(url) as response:
-        content = response.read().decode('latin-1')
-
-    with open(RATINGS_FILE, 'w', encoding='utf-8') as outfile:
-        outfile.write(content)
-
 def create_players_trf(args: argparse.Namespace) -> None:
     registrants = parse_registrants(args.players)
-    print(f'#registrants: {len(registrants)}')
-    rated_players = parse_rated_players(RATINGS_FILE)
-    print(f'#players in selolista: {len(rated_players)}')
+    info(f'#registrants: {len(registrants)}')
+    rated_players = RatedPlayers.parse()
+    info(f'#players in selolista: {len(rated_players)}')
     players = get_all_players(registrants, rated_players)
-    sorted_players = sorted(players, key=lambda p: p.rating, reverse=True)
+    sorted_players = RatedPlayers.sort_by_rating(players)
     if (args.group_ends):
         create_trf(sorted_players, args.group_ends, args.tournament or None)
     else:
