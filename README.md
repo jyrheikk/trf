@@ -6,17 +6,17 @@
 - Copy the code of this GitHub repository, select **Code** – Download ZIP.
 - [Install `uv`](https://docs.astral.sh/uv/getting-started/installation/), used for running the scripts below.
 
-## Creating a tournament
+## Creating the input data
 
-1. Download the latest `selolista.csv`:
+1. Download the latest ratings list in the `input/selolista.csv` file:
 
 ```bash
 uv run -m trf --download-ratings
 ```
 
-2. Create your customized [Tournament Report File](https://tornelo.com/knowledge-base/trfx-file-format/) based on `tournament.trf`.
+2. Create your customized [Tournament Report File](https://tornelo.com/knowledge-base/trfx-file-format/) named `input/tournament.trf` based on the `tournament.trf` template.
 
-3. Create the `players.csv` file that contains the participants one per line:
+3. Create the `input/players.csv` file that contains the participants one per line:
 
 ```csv
 last-name,first-name,club
@@ -35,22 +35,24 @@ For example, if registrations are in Google Sheet,
 4. Verify that all the registrants are found from the ratings list:
 
 ```bash
-uv run -m trf --players players.csv
+uv run -m trf
 ```
 
-Fix the player data in `players.csv` if needed. Player names are case-insensitive.
+Fix the player data in `input/players.csv` manually if needed. The player names are case-insensitive.
 
-5. Generate one or more tournament files, and divide the players into them:
+## Creating tournaments
+
+1. Generate one or more Tournament Report Files in `output/tournament-*.trf`, and divide the players into them:
 
 ```bash
-uv run -m trf --players players.csv --tournament my_tournament.trf --group_ends 10 24 38
+uv run -m trf --group-ends 10 24 38
 ```
 
-The numbers after the `group_ends` argument are the **indexes of the last player** in each group.
+The numbers after the `group-ends` argument are the **indexes of the last player** in each group.
 
-6. Create tournaments:
+2. Create tournaments:
 
 - Log in to ChessManager.
 - Select **New Tournament**.
-- Select **Import From File**, and choose the generated TRF file.
+- Select **Import From File**, and choose the generated TRF file from the `output` directory.
 - Add the club for each player if needed.
