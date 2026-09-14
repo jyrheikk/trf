@@ -14,10 +14,13 @@ def create_trf(players: list[Player], group_ends: list[int], tournament: str) ->
         with open(filename, 'w', encoding='utf-8') as outfile:
             group_players = players[first_player:last_player]
             players_trf = create_players(group_players)
-            outfile.write(tournament_info)
-            outfile.write('\n')
-            outfile.write('\n'.join(players_trf))
-            outfile.write('\n')
+            data = (
+                tournament_info +
+                '\n' +
+                '\n'.join(players_trf) +
+                '\n'
+            )
+            outfile.write(data)
             ok(f'Created {filename} ({last_player - first_player} players)')
             first_player = last_player
 
