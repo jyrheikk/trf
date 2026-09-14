@@ -1,4 +1,11 @@
-# Tournament Report File for a chess tournament
+# Create Tournament Report File(s) for a chess tournament
+
+You need two files:
+- List of registrants.
+- List of the latest ratings.
+
+To speed up creating several groups in a tournament, you may want to create the third file:
+- Tournament info.
 
 ## Prerequisites
 
@@ -40,7 +47,7 @@ For example, if registrations are in Google Sheet,
 
 Fix the player data in `input/players.csv` manually if needed. The player names are case-insensitive.
 
-## Creating tournaments
+## Running tournaments
 
 1. Generate one or more Tournament Report Files in `output/tournament-*.trf`, and divide the players into them:
 
@@ -55,4 +62,18 @@ The numbers after the `g` argument are the **indexes of the last player** in eac
 - Log in to ChessManager.
 - Select **New Tournament**.
 - Select **Import From File**, and choose the generated TRF file from the `output` directory.
-- Add the club for each player if needed.
+
+Having started the first round, add _Club_ for each player if needed.
+
+3. Export results
+
+After a tournament has finished, export its results for rating calculation:
+- Select _Dashboard – Basic information – Export – TRF 2026_.
+
+## Other
+
+For all options, see
+
+```bash
+trfx --help
+```
