@@ -3,12 +3,11 @@
 ## Prerequisites
 
 - Create an account in [ChessManager](https://chessmanager.com/).
-- Copy the code of this GitHub repository, select **Code** – Download ZIP.
+- Copy the code of this GitHub repository, select **Code – Download ZIP**.
 - [Install `uv`](https://docs.astral.sh/uv/getting-started/installation/), used for running the scripts below.
 
 > [!TIP]
-> Consider installing a browser add-on to show up-to-date results.
-> For example, [Easy Auto Refresh](https://chromewebstore.google.com/detail/easy-auto-refresh/aabcgdmkeabbnleenpncegpcngjpnjkc) for Chrome.
+> Install a browser add-on to show up-to-date results, say, [Easy Auto Refresh](https://chromewebstore.google.com/detail/easy-auto-refresh/aabcgdmkeabbnleenpncegpcngjpnjkc) for Chrome.
 
 ## Creating the input data
 
