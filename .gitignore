@@ -1,6 +1,3 @@
-*.csv
-*.trf
-!tournament.trf
 .coverage
 __pycache__
 input

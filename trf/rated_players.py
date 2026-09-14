@@ -5,8 +5,8 @@ from trf.csv import parse_rated_players
 from trf.player import Player
 
 class RatedPlayers:
-    def __init__(self):
-        self.players = parse_rated_players(RATINGS_FILE)
+    def __init__(self, ratings = RATINGS_FILE):
+        self.players = parse_rated_players(ratings)
 
     def search_all(self, participants: list[Player]) -> list[Player]:
         found = []
