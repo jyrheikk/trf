@@ -3,7 +3,7 @@
 import argparse
 
 from trf.args import parse_args, validate_args
-from trf.csv import parse_registrants
+from trf.csv import parse_participants
 from trf.log import info, warn
 from trf.player import Player
 from trf.rated_players import RatedPlayers
@@ -17,8 +17,8 @@ def main(args: argparse.Namespace) -> None:
 
 def create_players_trf(args: argparse.Namespace) -> None:
     rated_players = RatedPlayers()
-    registrants = parse_registrants(args.players)
-    players = rated_players.search_all(registrants)
+    participants = parse_participants(args.players)
+    players = rated_players.search_all(participants)
     if (args.group_ends):
         create_trf(players, args.group_ends, args.tournament or None)
     else:

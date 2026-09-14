@@ -13,7 +13,7 @@ RATINGS_FILE = f'{INPUT_DIR}/selolista.csv'
 def parse_args(argv = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog='trf',
-        description='Create Tournament Report File for a chess tournament'
+        description='Create Tournament Report Files for a chess tournament'
     )
 
     download = parser.add_argument_group('download')

@@ -8,16 +8,16 @@ class RatedPlayers:
     def __init__(self):
         self.players = parse_rated_players(RATINGS_FILE)
 
-    def search_all(self, registrants: list[Player]) -> list[Player]:
+    def search_all(self, participants: list[Player]) -> list[Player]:
         found = []
-        for reg in registrants:
-            player = reg.search(self.players)
+        for participant in participants:
+            player = participant.search(self.players)
             if player:
                 found.append(player)
             else:
-                p = Player(reg.first_name, reg.last_name)
-                p.set_new()
-                found.append(p)
+                player = Player(participant.first_name, participant.last_name)
+                player.set_new()
+                found.append(player)
         return sorted(found, key=lambda p: p.rating, reverse=True)
 
     @staticmethod
