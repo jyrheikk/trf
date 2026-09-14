@@ -15,15 +15,15 @@ To speed up creating several groups in a tournament, you may want to create the 
 
 ## Creating the input data
 
-1. Download the latest ratings list in the `input/selolista.csv` file:
+1. Download the latest ratings list in the `data/input/selolista.csv` file:
 
 ```bash
 ./trfx -d
 ```
 
-2. Create your customized [Tournament Report File](https://tornelo.com/knowledge-base/trfx-file-format/) named `input/tournament.trf` based on the `tournament.trf` template.
+2. Create your customized [Tournament Report File](https://tornelo.com/knowledge-base/trfx-file-format/) named `data/input/tournament.trf` based on the `tournament.trf` template.
 
-3. Create the `input/players.csv` file that contains the participants one per line:
+3. Create the `data/input/players.csv` file that contains the participants one per line:
 
 ```csv
 last-name,first-name,club
@@ -45,11 +45,11 @@ For example, if registrations are in Google Sheet,
 ./trfx
 ```
 
-Fix the player data in `input/players.csv` manually if needed. The player names are case-insensitive.
+Fix the player data in `data/input/players.csv` manually if needed. The player names are case-insensitive.
 
 ## Running tournaments
 
-1. Generate one or more Tournament Report Files in `output/tournament-*.trf`, and divide the players into them:
+1. Generate one or more Tournament Report Files in `data/output/tournament-*.trf`, and divide the players into them:
 
 ```bash
 ./trfx -g 10 24 38
@@ -61,7 +61,7 @@ The numbers after the `g` argument are the **indexes of the last player** in eac
 
 - Log in to ChessManager.
 - Select **New Tournament**.
-- Select **Import From File**, and choose the generated TRF file from the `output` directory.
+- Select **Import From File**, and choose the generated TRF file from the `data/output` directory.
 
 Having started the first round, add _Club_ for each player if needed.
 

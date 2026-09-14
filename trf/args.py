@@ -2,7 +2,7 @@ import argparse
 
 from trf.log import fatal
 
-INPUT_DIR = 'input'
+INPUT_DIR = 'data/input'
 
 DEFAULT_TOURNAMENT_FILE = f'{INPUT_DIR}/tournament.trf'
 

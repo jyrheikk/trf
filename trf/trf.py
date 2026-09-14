@@ -1,7 +1,7 @@
 from trf.log import ok
 from trf.player import Player
 
-OUTPUT_DIR = 'output'
+OUTPUT_DIR = 'data/output'
 
 TRF_PLAYER_ID = '001'
 
