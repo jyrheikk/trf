@@ -12,6 +12,11 @@ class Player:
         self.search_name = f'{last_name.lower()}, {first_name.lower()} {club_info}'
         self.is_new = False
 
+    def __eq__(self, other):
+        if not isinstance(other, Player):
+            return NotImplemented
+        return self.search_name == other.search_name
+
     def set_new(self) -> None:
         self.is_new = True
 
