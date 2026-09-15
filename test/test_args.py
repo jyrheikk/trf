@@ -5,8 +5,8 @@ from trf.args import parse_args, validate_args
 
 DOWNLOAD_ARG = ['--download-ratings']
 GROUP_ENDS_ARG = ['--group-ends', '16', '32']
-PLAYERS_ARG = ['--players', 'participants.csv']
-TOURNAMENT_ARG = ['--tournament', 'my-tournament.csv']
+PLAYERS_ARG = ['--players', 'test/data/test-players.csv']
+TOURNAMENT_ARG = ['--tournament', 'data/samples/tournament.trf']
 
 @pytest.mark.parametrize('option', ['-h', '--help'])
 def test_validate_args_show_help(capsys: CaptureFixture[str], option: str) -> None:
@@ -35,6 +35,14 @@ def test_validate_args_group_ends_order(capsys: CaptureFixture[str]) -> None:
         capsys,
         [GROUP_ENDS_ARG[0], '32', '16'],
         'ascending order'
+    )
+
+@pytest.mark.parametrize('filename', ['non-existing-file.csv'])
+def test_validate_args_filename(capsys: CaptureFixture[str], filename: str) -> None:
+    assert_args_msg(
+        capsys,
+        [PLAYERS_ARG[0], filename],
+        f'File not found: {filename}'
     )
 
 @pytest.mark.parametrize('option', ['--unknown-arg'])

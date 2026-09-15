@@ -1,7 +1,7 @@
 from trf.player import Player
 from trf.rated_players import RatedPlayers
 
-TEST_RATINGS = 'test/test-ratings.csv'
+TEST_RATINGS = 'test/data/test-ratings.csv'
 
 def test_search_all() -> None:
     rated = RatedPlayers(TEST_RATINGS)
