@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 
 from trf.log import fatal
 
@@ -55,8 +56,17 @@ def validate_args(args: argparse.Namespace) -> argparse.Namespace:
         values = to_str(args.group_ends)
         if sorted_values != values:
             fatal(f'Give arguments in the ascending order: --group_ends {values}')
+    if args.players:
+        assert_file(args.players)
+    if args.tournament:
+        assert_file(args.tournament)
 
     return args
+
+def assert_file(filename: str) -> None:
+    file_path = Path(filename)
+    if not file_path.exists():
+        fatal(f'File not found: {filename}')
 
 def to_str(arr: list[int]) -> str:
     return ' '.join(map(str, arr))
