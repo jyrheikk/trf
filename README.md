@@ -78,5 +78,5 @@ After a tournament has finished, export its results for rating calculation:
 For all options, see
 
 ```bash
-trfx --help
+./trfx -h
 ```
