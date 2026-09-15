@@ -1,8 +1,9 @@
 import urllib.request
 
-from trf.args import RATINGS_FILE
+from trf.args import INPUT_DIR, RATINGS_FILE
 from trf.csv import parse_rated_players
 from trf.player import Player
+from trf.trf import create_directory
 
 class RatedPlayers:
     def __init__(self, ratings = RATINGS_FILE):
@@ -27,5 +28,6 @@ class RatedPlayers:
         with urllib.request.urlopen(url) as response:
             content = response.read().decode('latin-1')
 
+        create_directory(INPUT_DIR)
         with open(RATINGS_FILE, 'w', encoding='utf-8') as outfile:
             outfile.write(content)

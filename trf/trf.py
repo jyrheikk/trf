@@ -1,3 +1,5 @@
+import os
+
 from trf.log import ok
 from trf.player import Player
 
@@ -8,6 +10,7 @@ TRF_PLAYER_ID = '001'
 def create_trf(players: list[Player], group_ends: list[int], tournament: str) -> None:
     with open(tournament) as file:
         tournament_info = file.read()
+    create_directory(OUTPUT_DIR)
     first_player = 0
     for index, last_player in enumerate(group_ends):
         filename = f'{OUTPUT_DIR}/tournament-{index + 1}.trf'
@@ -33,3 +36,7 @@ def create_players(players: list[Player]) -> str:
 def __format_player(player: Player, index: int) -> str:
     name = f'{player.last_name}, {player.first_name}'
     return f'{TRF_PLAYER_ID:<7}{index:<7}{name:<34}{player.rating}'
+
+def create_directory(path: str) -> None:
+    if not os.path.exists(path):
+        os.makedirs(path)
