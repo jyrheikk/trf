@@ -14,17 +14,17 @@ RATINGS_FILE = f'{INPUT_DIR}/selolista.csv'
 def parse_args(argv = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog='trf',
-        description='Create Tournament Report Files for a chess tournament'
+        description='Create Tournament Report Files (TRF) for a chess tournament'
     )
 
-    download = parser.add_argument_group('download')
+    download = parser.add_argument_group('download ratings')
     download.add_argument(
         '-d', '--download-ratings',
         action='store_true',
         help=f'download the latest {RATINGS_FILE}'
     )
 
-    create = parser.add_argument_group('create')
+    create = parser.add_argument_group('create Tournament Report Files')
     create.add_argument(
         '-g', '--groups',
         type=int,
