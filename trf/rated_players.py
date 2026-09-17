@@ -19,6 +19,8 @@ class RatedPlayers:
         for participant in participants:
             player = participant.search(self.players)
             if not player:
+                player = participant.search(self.players, only_name=True)
+            if not player:
                 player = Player(participant.first_name, participant.last_name, is_new=True)
             found.append(player)
         return sorted(found, key=lambda p: p.rating, reverse=True)
