@@ -7,12 +7,12 @@ OUTPUT_DIR = 'data/output'
 
 TRF_PLAYER_ID = '001'
 
-def create_trf(players: list[Player], group_ends: list[int], tournament: str) -> None:
+def create_trf(players: list[Player], groups: list[int], tournament: str) -> None:
     with open(tournament) as file:
         tournament_info = file.read()
     create_directory(OUTPUT_DIR)
     first_player = 0
-    for index, last_player in enumerate(group_ends):
+    for index, last_player in enumerate(groups):
         filename = f'{OUTPUT_DIR}/tournament-{index + 1}.trf'
         with open(filename, 'w', encoding='utf-8') as outfile:
             group_players = players[first_player:last_player]

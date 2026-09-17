@@ -19,8 +19,8 @@ def create_players_trf(args: argparse.Namespace) -> None:
     rated_players = RatedPlayers()
     participants = parse_participants(args.players)
     players = rated_players.search_all(participants)
-    if (args.group_ends):
-        create_trf(players, args.group_ends, args.tournament or None)
+    if (args.groups):
+        create_trf(players, args.groups, args.tournament or None)
     else:
         trf = create_players(players)
         print('\n'.join(trf))

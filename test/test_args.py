@@ -4,7 +4,7 @@ from pytest import CaptureFixture
 from trf.args import parse_args, validate_args
 
 DOWNLOAD_ARG = ['--download-ratings']
-GROUP_ENDS_ARG = ['--group-ends', '16', '32']
+GROUPS_ARG = ['--groups', '16', '32']
 PLAYERS_ARG = ['--players', 'test/data/test-players.csv']
 TOURNAMENT_ARG = ['--tournament', 'data/samples/tournament.trf']
 
@@ -19,21 +19,21 @@ def test_validate_args_show_help(capsys: CaptureFixture[str], option: str) -> No
 def test_validate_args_create_tournament_succeeds(capsys: CaptureFixture[str]) -> None:
     assert_args_ok(
         capsys,
-        [*GROUP_ENDS_ARG, *PLAYERS_ARG, *TOURNAMENT_ARG]
+        [*GROUPS_ARG, *PLAYERS_ARG, *TOURNAMENT_ARG]
     )
 
 @pytest.mark.parametrize('index', ['nonnumeric', '16.5'])
-def test_validate_args_group_ends_int(capsys: CaptureFixture[str], index: str) -> None:
+def test_validate_args_groups_int(capsys: CaptureFixture[str], index: str) -> None:
     assert_args_msg(
         capsys,
-        [GROUP_ENDS_ARG[0], index],
+        [GROUPS_ARG[0], index],
         'invalid int value'
     )
 
-def test_validate_args_group_ends_order(capsys: CaptureFixture[str]) -> None:
+def test_validate_args_groups_order(capsys: CaptureFixture[str]) -> None:
     assert_args_msg(
         capsys,
-        [GROUP_ENDS_ARG[0], '32', '16'],
+        [GROUPS_ARG[0], '32', '16'],
         'ascending order'
     )
 
