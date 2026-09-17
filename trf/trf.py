@@ -27,15 +27,16 @@ def create_trf(players: list[Player], groups: list[int], tournament: str) -> Non
             ok(f'Created {filename} ({last_player - first_player} players)')
             first_player = last_player
 
-def create_players(players: list[Player]) -> str:
+def create_players(players: list[Player], omit_id = False) -> str:
     trf = []
     for index, p in enumerate(players):
-        trf.append(__format_player(p, index + 1))
+        trf.append(__format_player(p, index + 1, omit_id))
     return trf
 
-def __format_player(player: Player, index: int) -> str:
+def __format_player(player: Player, index: int, omit_id) -> str:
     name = f'{player.last_name}, {player.first_name}'
-    return f'{TRF_PLAYER_ID:<7}{index:<7}{name:<34}{player.rating}'
+    id_field = '' if omit_id else f'{TRF_PLAYER_ID:<7}'
+    return f'{id_field}{index:<7}{name:<34}{player.rating}'
 
 def create_directory(path: str) -> None:
     if not os.path.exists(path):

@@ -35,7 +35,7 @@ def validate_groups(args: argparse.Namespace, count: int) -> None:
         args.groups.append(count)
 
 def list_players(players: list[Player]) -> None:
-    trf = create_players(players)
+    trf = create_players(players, omit_id=True)
     print('\n'.join(trf))
     check_new_players(players)
     last_group = len(players)
