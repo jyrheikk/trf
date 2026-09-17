@@ -17,7 +17,7 @@ class RatedPlayers:
     def search_all(self, participants: list[Player]) -> list[Player]:
         found = []
         for participant in participants:
-            player = participant.search(self.players) if participant.club else None
+            player = participant.search(self.players)
             if not player:
                 player = Player(participant.first_name, participant.last_name, is_new=True)
             found.append(player)
