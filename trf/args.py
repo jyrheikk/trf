@@ -33,6 +33,11 @@ def parse_args(argv = None) -> argparse.Namespace:
         help='indexes of the last player in each group'
     )
     create.add_argument(
+        '-n', '--no-header',
+        action='store_true',
+        help='do not skip the first line of the players file'
+    )
+    create.add_argument(
         '-p', '--players',
         type=str,
         metavar='PLAYERS_CSV',

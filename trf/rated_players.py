@@ -1,13 +1,18 @@
 import urllib.request
 
 from trf.args import INPUT_DIR, RATINGS_FILE
-from trf.csv import parse_rated_players
+from trf.csv import parse_csv
 from trf.player import Player
 from trf.trf import create_directory
 
 class RatedPlayers:
     def __init__(self, ratings = RATINGS_FILE):
-        self.players = parse_rated_players(ratings)
+        self.players = parse_csv(
+            ratings,
+            skip_header=False,
+            delimiter=';',
+            extra_fields=3
+        )
 
     def search_all(self, participants: list[Player]) -> list[Player]:
         found = []
