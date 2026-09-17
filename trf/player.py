@@ -19,7 +19,7 @@ class Player:
     def __eq__(self, other):
         if not isinstance(other, Player):
             return NotImplemented
-        return self.search_name == other.search_name
+        return self.search_name == other.search_name and self.rating == other.rating
 
     def search(self, players: list[Player]) -> Player:
         i = binary_search(
