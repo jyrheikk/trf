@@ -55,7 +55,7 @@ Fix the player data manually if needed. The player names are case-insensitive.
 ./trfx -g 10 24 38
 ```
 
-The numbers after the `g` argument are the **indexes of the last player** in each group.
+The numbers after the `-g` option are the **indexes of the last player** in each group.
 
 The files are created in `data/output/tournament-*.trf`.
 
@@ -74,7 +74,7 @@ After a tournament has finished, export its results for rating calculation:
 
 ## Other
 
-For all options, see
+See the help for all options:
 
 ```bash
 ./trfx -h
