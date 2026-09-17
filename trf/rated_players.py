@@ -17,13 +17,11 @@ class RatedPlayers:
     def search_all(self, participants: list[Player]) -> list[Player]:
         found = []
         for participant in participants:
-            player = participant.search(self.players)
-            if player:
-                found.append(player)
-            else:
+            player = participant.search(self.players) if participant.club else None
+            if not player:
                 player = Player(participant.first_name, participant.last_name)
                 player.set_new()
-                found.append(player)
+            found.append(player)
         return sorted(found, key=lambda p: p.rating, reverse=True)
 
     @staticmethod
