@@ -2,6 +2,7 @@ from trf.search import binary_search
 
 DEFAULT_RATING = '1525'
 
+NO_CLUB = '-'
 UNOFFICIAL_CLUB = '/'
 INACTIVE_SUFFIX = ' #'
 
@@ -30,7 +31,7 @@ class Player:
 
     @staticmethod
     def parse_club(club: str) -> str:
-        if UNOFFICIAL_CLUB in club:
+        if club == NO_CLUB or UNOFFICIAL_CLUB in club:
             return ''
         elif club.endswith(INACTIVE_SUFFIX):
             return club[:-len(INACTIVE_SUFFIX)]
