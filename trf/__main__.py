@@ -21,6 +21,7 @@ def handle_players(args: argparse.Namespace) -> None:
         validate_groups(args, len(players))
         create_trf(players, args.groups, args.tournament)
     else:
+        check_new_players(players)
         list_players(players)
 
 def get_players(args: argparse.Namespace) -> list[Player]:
@@ -34,18 +35,17 @@ def validate_groups(args: argparse.Namespace, count: int) -> None:
     elif count not in args.groups:
         args.groups.append(count)
 
-def list_players(players: list[Player]) -> None:
-    trf = create_players(players, omit_id=True)
-    print('\n'.join(trf))
-    check_new_players(players)
-    last_group = len(players)
-    first_group = last_group // 2
-    info(f'Create TRF: add the last player index of each group (--groups {first_group} {last_group})')
-
 def check_new_players(players: list[Player]) -> None:
     for p in players:
         if p.is_new:
             warn(f'Check if this is a new player: {p.search_name}')
+
+def list_players(players: list[Player]) -> None:
+    trf = create_players(players, omit_id=True)
+    print('\n'.join(trf))
+    last_group = len(players)
+    first_group = last_group // 2
+    info(f'Create TRF: add the last player index of each group (--groups {first_group} {last_group})')
 
 if __name__ == '__main__':
     main(validate_args(parse_args()))
