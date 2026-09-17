@@ -6,12 +6,15 @@ TEST_RATINGS = 'test/data/test-ratings.csv'
 def test_search_all() -> None:
     rated = RatedPlayers(TEST_RATINGS)
     participants = [
+        Player('Aarre', 'Aalto'),
+        Player('Erkki', 'Aalto', 'HämSK'),
         Player('jyrki', 'heikkinen', '', 'lauttssk'),
         Player('Somebody', 'Not Rated')
     ]
+    expected = [
+        Player('Jyrki', 'Heikkinen', '2064', 'LauttSSK'),
+        Player('Erkki', 'Aalto', '1949', 'HämSK'),
+        Player('Somebody', 'Not Rated', '1525'),
+        Player('Aarre', 'Aalto', '1409'),
+    ]
     result = rated.search_all(participants)
-    assert len(result) == 2
-    p1 = result[0]
-    assert p1.first_name == 'Jyrki' and p1.last_name == 'Heikkinen' and p1.rating == '2064'
-    p2 = result[1]
-    assert p2.first_name == 'Somebody' and p2.last_name == 'Not Rated' and p2.rating == '1525'
