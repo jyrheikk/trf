@@ -60,7 +60,7 @@ def validate_args(args: argparse.Namespace) -> argparse.Namespace:
         sorted_values = to_str(sorted_arr)
         values = to_str(args.groups)
         if sorted_values != values:
-            fatal(f'Give arguments in the ascending order: --groups {values}')
+            fatal(f'Give options in the ascending order: --groups {values}')
     if args.players:
         assert_file(args.players)
     if args.tournament:
