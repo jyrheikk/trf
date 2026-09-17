@@ -26,14 +26,13 @@ See the [Tournament Report File format](https://tornelo.com/knowledge-base/trfx-
 3. Create the **list of participants** (in the `data/input/players.csv` file):
 
 ```csv
-last-name,first-name,club
 Carlsen,Magnus,2823
 Heikkinen,Jyrki,2062
 ```
 
 > [!NOTE]
 > The following data in the participants file are ignored:
-> - The first line, which should be a header.
+> - The first line (header) unless the `-n` (`--no-header`) option is given.
 > - Extra fields after the `club` field.
 
 For example, if participants are in Google Sheet,
