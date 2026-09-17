@@ -9,7 +9,7 @@ class RatedPlayers:
     def __init__(self, ratings = RATINGS_FILE):
         self.players = parse_csv(
             ratings,
-            skip_header=False,
+            skip_header=True,
             delimiter=';',
             extra_fields=3
         )
