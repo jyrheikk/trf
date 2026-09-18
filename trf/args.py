@@ -51,6 +51,11 @@ def parse_args(argv = None) -> argparse.Namespace:
         default=DEFAULT_TOURNAMENT_FILE,
         help=f'name of the Tournament Report File (default {DEFAULT_TOURNAMENT_FILE})'
     )
+    create.add_argument(
+        '-w', '--without-ratings',
+        action='store_true',
+        help='create players without ratings'
+    )
 
     return parser.parse_args(argv)
 

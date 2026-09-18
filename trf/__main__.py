@@ -27,7 +27,7 @@ def handle_players(args: argparse.Namespace) -> None:
 def get_players(args: argparse.Namespace) -> list[Player]:
     rated_players = RatedPlayers()
     participants = parse_csv(args.players, skip_header=not args.no_header)
-    return rated_players.search_all(participants)
+    return participants if args.without_ratings else rated_players.search_all(participants)
 
 def validate_groups(args: argparse.Namespace, count: int) -> None:
     if args.groups[-1] > count:

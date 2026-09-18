@@ -8,6 +8,7 @@ GROUPS_ARG = ['--groups', '16', '32']
 NO_HEADER_ARG = ['--no-header']
 PLAYERS_ARG = ['--players', 'test/data/test-players.csv']
 TOURNAMENT_ARG = ['--tournament', 'data/samples/tournament.trf']
+WITHOUT_RATINGS_ARG = ['--without-ratings']
 
 @pytest.mark.parametrize('option', ['-h', '--help'])
 def test_validate_args_show_help(capsys: CaptureFixture[str], option: str) -> None:
@@ -20,7 +21,7 @@ def test_validate_args_show_help(capsys: CaptureFixture[str], option: str) -> No
 def test_validate_args_create_tournament_succeeds(capsys: CaptureFixture[str]) -> None:
     assert_args_ok(
         capsys,
-        [*GROUPS_ARG, *NO_HEADER_ARG, *PLAYERS_ARG, *TOURNAMENT_ARG]
+        [*GROUPS_ARG, *NO_HEADER_ARG, *PLAYERS_ARG, *TOURNAMENT_ARG, *WITHOUT_RATINGS_ARG]
     )
 
 @pytest.mark.parametrize('index', ['nonnumeric', '16.5'])
