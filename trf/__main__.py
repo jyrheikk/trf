@@ -38,7 +38,7 @@ def validate_groups(args: argparse.Namespace, count: int) -> None:
 def check_new_players(players: list[Player]) -> None:
     for p in players:
         if p.is_new:
-            warn(f'Check if new player: {p.full_details}')
+            warn(f'Check if new player: {p.name_club}')
 
 def list_players(players: list[Player]) -> None:
     trf = create_players(players, omit_id=True)

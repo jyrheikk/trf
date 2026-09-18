@@ -1,3 +1,4 @@
+from trf.log import fatal
 from trf.search import binary_search
 
 DEFAULT_RATING = '1525'
@@ -13,23 +14,43 @@ class Player:
         self.rating = rating
         self.club = Player.parse_club(club)
         optional_first_name = f', {self.first_name}' if self.first_name else ''
-        self.full_name = f'{last_name}{optional_first_name}'
+        self.name = f'{last_name}{optional_first_name}'
         optional_club = f' ({self.club})' if self.club else ''
-        self.full_details = f'{self.full_name}{optional_club}'
-        self.search_name = self.full_name.lower()
-        self.search_details = self.full_details.lower()
+        self.name_club = f'{self.name}{optional_club}'
+        self.name_rating = f'{self.name_club} {self.rating}'
+        self.__search_name = self.name.lower()
+        self.__search_name_club = self.name_club.lower()
         self.is_new = is_new
 
     def __eq__(self, other) -> bool:
-        return self.search_name == other.search_name and self.rating == other.rating
+        return self.__search_name == other.__search_name and self.rating == other.rating
 
     def search(self, players: list[Player], only_name = False) -> Player | None:
         i = binary_search(
             players,
-            self.search_name if only_name else self.search_details,
-            key=lambda x: x.search_name if only_name else x.search_details
+            self.__search_name if only_name else self.__search_name_club,
+            key=lambda x: x.__search_name if only_name else x.__search_name_club
         )
-        return players[i] if i > -1 else None
+        if i == -1:
+            return None
+        elif only_name:
+            self.verify_unique_name(players, i)
+        return players[i]
+
+    def verify_unique_name(self, players: list[Player], i: int) -> None:
+        duplicate = self.search_duplicate(players, i - 1) or self.search_duplicate(players, i + 1)
+        if duplicate:
+            fatal(
+                'Duplicates found, add Club in the players list:\n' +
+                players[i].name_rating +
+                '\n' +
+                duplicate.name_rating
+            )
+
+    def search_duplicate(self, players: list[Player], i: int) -> Player | None:
+        if i > 0 and i < len(players) and self.__search_name == players[i].__search_name:
+            return players[i]
+        return None
 
     @staticmethod
     def parse_club(club: str) -> str:

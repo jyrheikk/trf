@@ -48,7 +48,7 @@ def create_players(players: list[Player], omit_id = False) -> str:
 
 def __format_player(player: Player, index: int, omit_id) -> str:
     id_field = '' if omit_id else f'{TRF_PLAYER_ID:<7}'
-    return f'{id_field}{index:<7}{player.full_name:<34}{player.rating}'
+    return f'{id_field}{index:<7}{player.name:<34}{player.rating}'
 
 def create_directory(path: str) -> None:
     if not os.path.exists(path):
