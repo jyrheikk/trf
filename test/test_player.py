@@ -21,5 +21,5 @@ def test_search_fails_with_incorrect_club() -> None:
 
 def test_search_succeeds_with_only_name() -> None:
     participant = Player('jyrki', 'heikkinen', '', 'club typo')
-    player = participant.search(RATINGS, only_name = True)
+    player = participant.search(RATINGS, only_name=True)
     assert player == Player('Jyrki', 'Heikkinen', '2064', 'LauttSSK')

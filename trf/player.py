@@ -12,9 +12,12 @@ class Player:
         self.last_name = last_name
         self.rating = rating
         self.club = Player.parse_club(club)
-        self.search_name = f'{last_name.lower()}, {first_name.lower()}'
-        club_info = f' ({self.club.lower()})' if self.club else ''
-        self.search_full = f'{self.search_name}{club_info}'
+        optional_first_name = f', {self.first_name}' if self.first_name else ''
+        self.full_name = f'{last_name}{optional_first_name}'
+        optional_club = f' ({self.club})' if self.club else ''
+        self.full_details = f'{self.full_name}{optional_club}'
+        self.search_name = self.full_name.lower()
+        self.search_details = self.full_details.lower()
         self.is_new = is_new
 
     def __eq__(self, other) -> bool:
@@ -23,8 +26,8 @@ class Player:
     def search(self, players: list[Player], only_name = False) -> Player | None:
         i = binary_search(
             players,
-            self.search_name if only_name else self.search_full,
-            key=lambda x: x.search_name if only_name else x.search_full
+            self.search_name if only_name else self.search_details,
+            key=lambda x: x.search_name if only_name else x.search_details
         )
         return players[i] if i > -1 else None
 

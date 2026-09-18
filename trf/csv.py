@@ -18,6 +18,6 @@ def parse_csv(filename: str, skip_header: bool, delimiter = ',', extra_fields = 
                 row[FIRST_NAME],
                 row[LAST_NAME],
                 row[RATING] if len(row) > RATING else '',
-                row[CLUB],
+                row[CLUB] if len(row) > CLUB else '',
             ))
         return result
