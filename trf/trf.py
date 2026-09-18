@@ -1,9 +1,13 @@
 import os
+from string import ascii_uppercase as ASCII
+
 
 from trf.log import ok
 from trf.player import Player
 
 OUTPUT_DIR = 'data/output'
+
+GROUP_ID = '{GROUP}'
 
 TRF_PLAYER_ID = '001'
 
@@ -12,13 +16,13 @@ def create_trf(players: list[Player], groups: list[int], tournament: str) -> Non
         tournament_info = file.read()
     create_directory(OUTPUT_DIR)
     first_player = 0
-    for index, last_player in enumerate(groups):
-        filename = f'{OUTPUT_DIR}/tournament-{index + 1}.trf'
+    for i, last_player in enumerate(groups):
+        filename = f'{OUTPUT_DIR}/tournament-{ASCII[i]}.trf'
         with open(filename, 'w', encoding='utf-8') as outfile:
             group_players = players[first_player:last_player]
             players_trf = create_players(group_players)
             data = (
-                tournament_info +
+                tournament_info.replace(GROUP_ID, ASCII[i]) +
                 '\n' +
                 '\n'.join(players_trf) +
                 '\n'
@@ -29,8 +33,8 @@ def create_trf(players: list[Player], groups: list[int], tournament: str) -> Non
 
 def create_players(players: list[Player], omit_id = False) -> str:
     trf = []
-    for index, p in enumerate(players):
-        trf.append(__format_player(p, index + 1, omit_id))
+    for i, p in enumerate(players):
+        trf.append(__format_player(p, i + 1, omit_id))
     return trf
 
 def __format_player(player: Player, index: int, omit_id) -> str:
