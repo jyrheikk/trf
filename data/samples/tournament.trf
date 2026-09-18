@@ -1,13 +1,12 @@
-012 Tournament Name
+012 Tournament Name {GROUP}
 022 Helsinki
 032 FIN
 042 2026/10/03
 052 2026/10/04
-092 Swiss-System
+092 Swiss System
 102 Jyrki Heikkinen
 122 Standard: 90min +30sec increment per move starting from move 1
-152 B
-172 FIN FIDON
+172 FIN NRO
 182 ChessManager
 192 FIDE_DUTCH
 XXR 4
