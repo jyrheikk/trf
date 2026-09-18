@@ -15,7 +15,19 @@
 - Create a file named `data/input/tournament.trf`.
 - Reuse the `data/samples/tournament.trf` template if needed.
 
-See the [Tournament Report File format](https://tornelo.com/knowledge-base/trfx-file-format/).
+Set at least the following information:
+
+ID | Value
+-- | -----
+012 | Tournament name, `{GROUP}` is automatically set as `A`, `B` etc.
+022 | Name of the city where the tournament is played
+032 | 3-letter country code (e.g., `FIN`)
+042 | Tournament start date (YYYY/MM/DD)
+052 | Tournament end date (YYYY/MM/DD)
+102 | Tournament arbiter
+XXR | Number of rounds
+
+See the [Tournament Report File format](https://github.com/echecsjs/trf/blob/main/SPEC.md) for more. Note that some data are not supported by ChessManager.
 
 2. Download the **latest ratings** in the `data/input/selolista.csv` file:
 
@@ -26,11 +38,13 @@ See the [Tournament Report File format](https://tornelo.com/knowledge-base/trfx-
 3. Create the **list of participants** (in the `data/input/players.csv` file):
 
 ```csv
-Carlsen,Magnus,2823
-Heikkinen,Jyrki,2062
+surname,first,club
+Heikkinen,Jyrki,LauttSSK
+Koivusipilä,Hannes,LauttSSK
 ```
 
 > [!NOTE]
+> The names are case-insensitive.
 > The following data in the participants file are ignored:
 > - The first line (header) unless the `-n` (`--no-header`) option is given.
 > - Extra fields after the `club` field.
@@ -45,7 +59,7 @@ Verify that all the participants are found from the ratings list:
 ./trfx
 ```
 
-Fix the player data manually if needed. The player names are case-insensitive.
+Fix the participant data manually if needed.
 
 ## Running tournaments
 
