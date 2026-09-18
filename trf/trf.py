@@ -1,7 +1,6 @@
 import os
 from string import ascii_uppercase as ASCII
 
-
 from trf.log import ok
 from trf.player import Player
 
@@ -11,25 +10,35 @@ GROUP_ID = '{GROUP}'
 
 TRF_PLAYER_ID = '001'
 
-def create_trf(players: list[Player], groups: list[int], tournament: str) -> None:
+def create_trf(players: list[Player], group_ends: list[int], tournament: str) -> None:
     with open(tournament) as file:
         tournament_info = file.read()
+    groups = create_groups(players, group_ends, tournament_info)
     create_directory(OUTPUT_DIR)
-    first_player = 0
-    for i, last_player in enumerate(groups):
+    for i, group in enumerate(groups):
         filename = f'{OUTPUT_DIR}/tournament-{ASCII[i]}.trf'
         with open(filename, 'w', encoding='utf-8') as outfile:
-            group_players = players[first_player:last_player]
-            players_trf = create_players(group_players)
-            data = (
-                tournament_info.replace(GROUP_ID, ASCII[i]) +
-                '\n' +
-                '\n'.join(players_trf) +
-                '\n'
-            )
-            outfile.write(data)
-            ok(f'Created {filename} ({last_player - first_player} players)')
-            first_player = last_player
+            outfile.write(group['data'])
+            ok(f'Created {filename} ({group['player_count']} players)')
+
+def create_groups(players: list[Player], group_ends: list[int], tournament_info: str) -> None:
+    trf = []
+    first_player = 0
+    for i, last_player in enumerate(group_ends):
+        group_players = players[first_player:last_player]
+        players_trf = create_players(group_players)
+        group = (
+            tournament_info.replace(GROUP_ID, ASCII[i]) +
+            '\n' +
+            '\n'.join(players_trf) +
+            '\n'
+        )
+        trf.append({
+            'data': group,
+            'player_count': last_player - first_player
+        })
+        first_player = last_player
+    return trf
 
 def create_players(players: list[Player], omit_id = False) -> str:
     trf = []
