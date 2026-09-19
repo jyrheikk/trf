@@ -17,6 +17,11 @@ def test_parse_club(club: str) -> None:
 def test_parse_club_to_empty(club: str) -> None:
     assert Player.parse_club('KJ/Lauttasaari') == ''
 
+def test_set_license() -> None:
+    p = Player('random', 'surname')
+    p.set_license()
+    assert p.has_license
+
 def test_search_succeeds_with_only_name() -> None:
     participant = Player('random', 'surname', '', 'Wrong Club')
     player = participant.search(RATINGS, only_name=True)

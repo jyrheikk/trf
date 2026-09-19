@@ -10,7 +10,7 @@ def test_search_all() -> None:
         Player('Somebody', 'Not Rated')
     ]
     expected = [
-        Player('Jyrki', 'Heikkinen', '2064', 'LauttSSK'),
+        Player('Jyrki', 'Heikkinen', '2047', 'LauttSSK'),
         Player('Somebody', 'Not Rated', '1525')
     ]
     assert rated.search_all(participants) == expected
