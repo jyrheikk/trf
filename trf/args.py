@@ -38,6 +38,11 @@ def parse_args(argv = None) -> argparse.Namespace:
         help='do not skip the first line of the players file'
     )
     create.add_argument(
+        '-l', '--license',
+        action='store_true',
+        help='list players without license'
+    )
+    create.add_argument(
         '-p', '--players',
         type=str,
         metavar='PLAYERS_CSV',
