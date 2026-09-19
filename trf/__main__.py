@@ -25,9 +25,11 @@ def handle_players(args: argparse.Namespace) -> None:
         list_players(players)
 
 def get_players(args: argparse.Namespace) -> list[Player]:
-    rated_players = RatedPlayers()
     participants = parse_csv(args.players, skip_header=not args.no_header)
-    return participants if args.without_ratings else rated_players.search_all(participants)
+    if args.without_ratings:
+        return participants
+    rated_players = RatedPlayers()
+    return rated_players.search_all(participants)
 
 def check_new_players(players: list[Player]) -> None:
     for p in players:
