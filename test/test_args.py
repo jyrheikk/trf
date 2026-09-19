@@ -6,8 +6,8 @@ from trf.args import parse_args, validate_args
 DOWNLOAD_ARG = ['--download-ratings']
 GROUPS_ARG = ['--groups', '16', '32']
 NO_HEADER_ARG = ['--no-header']
-PLAYERS_ARG = ['--players', 'test/data/test-players.csv']
-TOURNAMENT_ARG = ['--tournament', 'data/samples/tournament.trf']
+PLAYERS_ARG = ['--players-file', 'test/data/test-players.csv']
+TOURNAMENT_ARG = ['--tournament-file', 'data/samples/tournament.trf']
 WITHOUT_RATINGS_ARG = ['--without-ratings']
 
 @pytest.mark.parametrize('option', ['-h', '--help'])

@@ -1,14 +1,14 @@
 import urllib.request
+from pathlib import Path
 
-from trf.args import INPUT_DIR, RATINGS_FILE
 from trf.csv import parse_csv
 from trf.player import Player
 from trf.trf import create_directory
 
 class RatedPlayers:
-    def __init__(self, ratings = RATINGS_FILE):
+    def __init__(self, ratings_file: str):
         self.players = parse_csv(
-            ratings,
+            ratings_file,
             skip_header=True,
             delimiter=';',
             extra_fields=3
@@ -31,12 +31,11 @@ class RatedPlayers:
         return sorted(found, key=lambda p: p.rating, reverse=True)
 
     @staticmethod
-    def download() -> None:
+    def download(ratings_file: str) -> None:
         url = 'https://www.shakki.net/selo/selolista.csv'
-
         with urllib.request.urlopen(url) as response:
             content = response.read().decode('latin-1')
-
-        create_directory(INPUT_DIR)
-        with open(RATINGS_FILE, 'w', encoding='utf-8') as outfile:
+        file_path = Path(ratings_file)
+        create_directory(file_path.parent)
+        with open(ratings_file, 'w', encoding='utf-8') as outfile:
             outfile.write(content)

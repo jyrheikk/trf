@@ -9,7 +9,7 @@ DEFAULT_TOURNAMENT_FILE = f'{INPUT_DIR}/tournament.trf'
 
 DEFAULT_PLAYERS_FILE = f'{INPUT_DIR}/players.csv'
 
-RATINGS_FILE = f'{INPUT_DIR}/selolista.csv'
+DEFAULT_RATINGS_FILE = f'{INPUT_DIR}/selolista.csv'
 
 def parse_args(argv = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -17,14 +17,45 @@ def parse_args(argv = None) -> argparse.Namespace:
         description='Create Tournament Report Files (TRF) for a chess tournament'
     )
 
-    download = parser.add_argument_group('download ratings')
+    download = parser.add_argument_group('download ratings (+ --ratings option)')
     download.add_argument(
         '-d', '--download-ratings',
         action='store_true',
-        help=f'download the latest {RATINGS_FILE}'
+        help='download the latest ratings file'
     )
 
-    create = parser.add_argument_group('create Tournament Report Files')
+    players = parser.add_argument_group('list players')
+    players.add_argument(
+        '-l', '--license',
+        action='store_true',
+        help='list players without license'
+    )
+    players.add_argument(
+        '-n', '--no-header',
+        action='store_true',
+        help='do not skip the first line of the players file'
+    )
+    players.add_argument(
+        '-p', '--players-file',
+        type=str,
+        metavar='PLAYERS.CSV',
+        default=DEFAULT_PLAYERS_FILE,
+        help=f'name of the players CSV file (default {DEFAULT_PLAYERS_FILE})'
+    )
+    players.add_argument(
+        '-r', '--ratings-file',
+        type=str,
+        metavar='RATINGS.CSV',
+        default=DEFAULT_RATINGS_FILE,
+        help=f'name of the ratings CSV file (default {DEFAULT_RATINGS_FILE})'
+    )
+    players.add_argument(
+        '-w', '--without-ratings',
+        action='store_true',
+        help='list players without ratings'
+    )
+
+    create = parser.add_argument_group('create Tournament Report Files (+ list players options)')
     create.add_argument(
         '-g', '--groups',
         type=int,
@@ -33,42 +64,20 @@ def parse_args(argv = None) -> argparse.Namespace:
         help='indexes of the last player in each group'
     )
     create.add_argument(
-        '-n', '--no-header',
-        action='store_true',
-        help='do not skip the first line of the players file'
-    )
-    create.add_argument(
-        '-l', '--license',
-        action='store_true',
-        help='list players without license'
-    )
-    create.add_argument(
-        '-p', '--players',
+        '-t', '--tournament-file',
         type=str,
-        metavar='PLAYERS_CSV',
-        default=DEFAULT_PLAYERS_FILE,
-        help=f'name of the players CSV file (default {DEFAULT_PLAYERS_FILE})'
-    )
-    create.add_argument(
-        '-t', '--tournament',
-        type=str,
-        metavar='TOURNAMENT_TRF',
+        metavar='TOURNAMENT.TRF',
         default=DEFAULT_TOURNAMENT_FILE,
         help=f'name of the Tournament Report File (default {DEFAULT_TOURNAMENT_FILE})'
-    )
-    create.add_argument(
-        '-w', '--without-ratings',
-        action='store_true',
-        help='create players without ratings'
     )
 
     return parser.parse_args(argv)
 
 def validate_args(args: argparse.Namespace) -> argparse.Namespace:
-    if args.players:
-        assert_file(args.players)
-    if args.tournament:
-        assert_file(args.tournament)
+    if args.players_file:
+        assert_file(args.players_file)
+    if args.tournament_file:
+        assert_file(args.tournament_file)
 
     return args
 

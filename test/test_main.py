@@ -11,7 +11,12 @@ EXPECTED_OUTPUT = [
 ]
 
 def test_list_players(capsys: CaptureFixture[str]) -> None:
-    args = ['--players', 'test/data/test-players.csv']
+    args = [
+        '--players',
+        'test/data/test-players.csv',
+        '--ratings',
+        'test/data/test-ratings.csv',
+    ]
     main(parse_args(args))
     output = capsys.readouterr()
     for row in EXPECTED_OUTPUT:
