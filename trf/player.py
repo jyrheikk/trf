@@ -48,7 +48,7 @@ class Player:
             )
 
     def search_duplicate(self, players: list[Player], i: int) -> Player | None:
-        if i > 0 and i < len(players) and self.__search_name == players[i].__search_name:
+        if i > -1 and i < len(players) and self.__search_name == players[i].__search_name:
             return players[i]
         return None
 
