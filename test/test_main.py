@@ -4,8 +4,10 @@ from trf.__main__ import main
 from trf.args import parse_args
 
 EXPECTED_OUTPUT = [
+    'Check if new player: Player, Random',
     '1      Heikkinen, Jyrki                  2064',
-    'Create TRF: add the last player index of each group (--groups 0 1)'
+    '2      Player, Random                    1525',
+    '(--groups 1 2)'
 ]
 
 def test_list_players(capsys: CaptureFixture[str]) -> None:
