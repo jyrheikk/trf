@@ -59,19 +59,26 @@ def parse_args(argv = None) -> argparse.Namespace:
 
     return parser.parse_args(argv)
 
-def validate_args(args: argparse.Namespace) -> argparse.Namespace:
+def validate_args(args: argparse.Namespace, groups_count = 0) -> argparse.Namespace:
     if args.groups:
-        sorted_arr = sorted(args.groups, key=int)
-        sorted_values = to_str(sorted_arr)
-        values = to_str(args.groups)
-        if sorted_values != values:
-            fatal(f'Give options in the ascending order: --groups {values}')
+        validate_groups(args, groups_count)
     if args.players:
         assert_file(args.players)
     if args.tournament:
         assert_file(args.tournament)
 
     return args
+
+def validate_groups(args: argparse.Namespace, count: int) -> None:
+    sorted_arr = sorted(args.groups, key=int)
+    sorted_values = to_str(sorted_arr)
+    values = to_str(args.groups)
+    if sorted_values != values:
+        fatal(f'Give options in the ascending order: --groups {values}')
+    elif args.groups[-1] > count:
+        fatal(f'--groups option: the last number can not be > {count}')
+    elif count not in args.groups:
+        args.groups.append(count)
 
 def assert_file(filename: str) -> None:
     file_path = Path(filename)
