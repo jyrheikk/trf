@@ -59,9 +59,7 @@ def parse_args(argv = None) -> argparse.Namespace:
 
     return parser.parse_args(argv)
 
-def validate_args(args: argparse.Namespace, groups_count = 0) -> argparse.Namespace:
-    if args.groups:
-        validate_groups(args, groups_count)
+def validate_args(args: argparse.Namespace) -> argparse.Namespace:
     if args.players:
         assert_file(args.players)
     if args.tournament:

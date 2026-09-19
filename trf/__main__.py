@@ -2,7 +2,7 @@
 
 import argparse
 
-from trf.args import parse_args, validate_args
+from trf.args import parse_args, validate_args, validate_groups
 from trf.csv import parse_csv
 from trf.log import info, warn
 from trf.player import Player
@@ -18,7 +18,7 @@ def main(args: argparse.Namespace) -> None:
 def handle_players(args: argparse.Namespace) -> None:
     players = get_players(args)
     if (args.groups):
-        validate_args(args, len(players))
+        validate_groups(args, len(players))
         create_trf(players, args.groups, args.tournament)
     else:
         check_new_players(players)
@@ -42,4 +42,4 @@ def list_players(players: list[Player]) -> None:
     info(f'Create TRF: add the last player index of each group (--groups {first_group} {last_group})')
 
 if __name__ == '__main__':
-    main(parse_args())
+    main(validate_args(parse_args()))
