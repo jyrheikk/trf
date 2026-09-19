@@ -67,6 +67,10 @@ Verify that all the participants are found from the ratings list:
 ./trfx
 ```
 
+Warning is shown for each player who
+- is not found from the ratings list, or
+- has no chess license (if the `--license` option is given).
+
 Fix the participant data manually if needed.
 
 ## Running tournaments
