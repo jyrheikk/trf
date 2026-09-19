@@ -9,9 +9,10 @@ class RatedPlayers:
     def __init__(self, ratings_file: str):
         self.players = parse_csv(
             ratings_file,
-            skip_header=True,
-            delimiter=';',
-            extra_fields=3
+            header=True,
+            delim=';',
+            leading_fields=3,
+            rating=True
         )
 
     def search_all(self, participants: list[Player]) -> list[Player]:

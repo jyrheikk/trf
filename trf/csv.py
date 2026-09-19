@@ -2,26 +2,26 @@ import csv
 
 from trf.player import Player
 
-def parse_csv(filename: str, skip_header: bool, delimiter = ',', extra_fields = 0) -> list[Player]:
-    LAST_NAME = 0 + extra_fields
-    FIRST_NAME = 1 + extra_fields
-    CLUB = 2 + extra_fields
-    RATING = 3 + extra_fields
-    LICENSE = 13 + extra_fields
+def parse_csv(filename: str, header: bool, delim = ',', leading_fields = 0, rating = False) -> list[Player]:
+    LAST_NAME = 0 + leading_fields
+    FIRST_NAME = 1 + leading_fields
+    CLUB = 2 + leading_fields
+    RATING = 3 + leading_fields
+    LICENSE = 13 + leading_fields
 
     with open(filename, encoding='utf-8') as file:
-        reader = csv.reader(file, delimiter=delimiter)
-        if skip_header:
+        reader = csv.reader(file, delimiter=delim)
+        if header:
             next(reader)
         result = []
         for row in reader:
             p = Player(
-                first_name=get_value(FIRST_NAME, row),
                 last_name=get_value(LAST_NAME, row),
-                rating=get_value(RATING, row),
+                first_name=get_value(FIRST_NAME, row),
                 club=get_value(CLUB, row),
+                rating=get_value(RATING, row) if rating else '',
             )
-            if get_value(LICENSE, row) == 'L':
+            if rating and get_value(LICENSE, row) == 'L':
                 p.set_license()
             result.append(p)
         return result
