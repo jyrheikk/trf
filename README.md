@@ -40,7 +40,7 @@ See the [Tournament Report File format](https://github.com/echecsjs/trf/blob/mai
 2. Download the **latest ratings** in the `data/input/selolista.csv` file:
 
 ```bash
-./trfx -d
+./trfx --download
 ```
 
 3. Create the **list of participants** (in the `data/input/players.csv` file):
@@ -54,7 +54,7 @@ Koivusipilä,Hannes,LauttSSK
 > [!NOTE]
 > The names are case-insensitive.
 > The following data in the participants file are ignored:
-> - The first line (header) unless the `-n` (`--no-header`) option is given.
+> - The first line (header) unless the `--no-header` option is given.
 > - Extra fields after the `club` field.
 
 For example, if participants are in Google Sheet,
@@ -78,10 +78,10 @@ Fix the participant data manually if needed.
 1. Generate Tournament Report Files, and divide the players into them:
 
 ```bash
-./trfx -g 10 24 38
+./trfx --groups 10 24 38
 ```
 
-The numbers after the `-g` option are the **indexes of the last player** in each group.
+The numbers after the `--groups` option are the **indexes of the last player** in each group.
 
 The files are created in `data/output/tournament-*.trf`.
 
@@ -103,5 +103,5 @@ After a tournament has finished, export its results for rating calculation:
 See the help for all options:
 
 ```bash
-./trfx -h
+./trfx --help
 ```
