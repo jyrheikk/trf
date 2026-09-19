@@ -25,7 +25,15 @@ ID | Value
 042 | Tournament start date (YYYY/MM/DD)
 052 | Tournament end date (YYYY/MM/DD)
 102 | Tournament arbiter
+202 | Tie-breaks (see below)
 XXR | Number of rounds
+
+For example, `BH/P,SB/P,DE/P,WIN,PS` are the default tie-breaks in Finnish tournaments:
+1. Buchholz
+2. Sonneborn-Berger
+3. Direct Encounter
+4. Number of Wins
+5. Progressive Score
 
 See the [Tournament Report File format](https://github.com/echecsjs/trf/blob/main/SPEC.md) for more. Note that some data are not supported by ChessManager.
 
