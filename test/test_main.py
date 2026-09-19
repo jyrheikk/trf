@@ -4,7 +4,7 @@ from trf.__main__ import main
 from trf.args import parse_args
 
 EXPECTED_OUTPUT = [
-    'Check if new player: Player, Random',
+    'Is new player: Player, Random',
     '1      Heikkinen, Jyrki                  2064',
     '2      Player, Random                    1525',
     '(--groups 1 2)'

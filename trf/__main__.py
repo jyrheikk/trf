@@ -21,7 +21,7 @@ def handle_players(args: argparse.Namespace) -> None:
         validate_groups(args, len(players))
         create_trf(players, args.groups, args.tournament)
     else:
-        check_new_players(players)
+        check_valid_players(players)
         list_players(players)
 
 def get_players(args: argparse.Namespace) -> list[Player]:
@@ -31,10 +31,12 @@ def get_players(args: argparse.Namespace) -> list[Player]:
     rated_players = RatedPlayers()
     return rated_players.search_all(participants)
 
-def check_new_players(players: list[Player]) -> None:
+def check_valid_players(players: list[Player]) -> None:
     for p in players:
         if p.is_new:
-            warn(f'Check if new player: {p.name_club}')
+            warn(f'Is new player: {p.name_club}')
+        elif not p.has_license:
+            warn(f'No license: {p.name_club}')
 
 def list_players(players: list[Player]) -> None:
     trf = create_players(players, omit_id=True)

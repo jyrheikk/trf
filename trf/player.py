@@ -8,19 +8,29 @@ UNOFFICIAL_CLUB = '/'
 INACTIVE_SUFFIX = ' #'
 
 class Player:
-    def __init__(self, first_name: str, last_name: str, rating = DEFAULT_RATING, club = '', is_new = False):
+    def __init__(self, first_name: str, last_name: str, rating = DEFAULT_RATING, club = ''):
         self.first_name = first_name
         self.last_name = last_name
         self.rating = rating
         self.club = Player.parse_club(club)
+        self.has_license = False
+        self.is_new = False
+        self.__set_helper_fields()
+
+    def __set_helper_fields(self) -> None:
         optional_first_name = f', {self.first_name}' if self.first_name else ''
-        self.name = f'{last_name}{optional_first_name}'
+        self.name = f'{self.last_name}{optional_first_name}'
         optional_club = f' ({self.club})' if self.club else ''
         self.name_club = f'{self.name}{optional_club}'
         self.name_rating = f'{self.name_club} {self.rating}'
         self.__search_name = self.name.lower()
         self.__search_name_club = self.name_club.lower()
-        self.is_new = is_new
+
+    def set_license(self) -> None:
+        self.has_license = True
+
+    def set_new(self) -> None:
+        self.is_new = True
 
     def __eq__(self, other) -> bool:
         return self.__search_name == other.__search_name and self.rating == other.rating

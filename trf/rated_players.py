@@ -25,8 +25,8 @@ class RatedPlayers:
                     participant.first_name,
                     participant.last_name,
                     club=participant.club,
-                    is_new=True
                 )
+                player.set_new()
             found.append(player)
         return sorted(found, key=lambda p: p.rating, reverse=True)
 
