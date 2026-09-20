@@ -15,10 +15,10 @@
 - Create a file named `data/input/tournament.trf`.
 - Reuse the `data/samples/tournament.trf` template if needed.
 
-Set at least the following information:
+Set at least the following tags:
 
-ID | Value
--- | -----
+Tag | Value
+--- | -----
 012 | Tournament name, `{GROUP}` is automatically set as `A`, `B` etc.
 022 | Name of the city where the tournament is played
 032 | 3-letter country code (e.g., `FIN`)
@@ -35,7 +35,7 @@ For example, `BH/P,SB/P,DE/P,WIN,PS` are the default tie-breaks in Finnish tourn
 4. Number of Wins
 5. Progressive Score
 
-See the [Tournament Report File format](https://github.com/echecsjs/trf/blob/main/SPEC.md) for more. Note that some data are not supported by ChessManager.
+See the [Tournament Report File format](https://github.com/echecsjs/trf/blob/main/SPEC.md) for more. Note that some tags are not supported by ChessManager.
 
 2. Download the **latest ratings** in the `data/input/selolista.csv` file:
 
@@ -53,7 +53,7 @@ Koivusipilä,Hannes,LauttSSK
 
 > [!NOTE]
 > The names are case-insensitive.
-> The following data in the participants file are ignored:
+> The following data in the participants file are **ignored**:
 > - The first line (header) unless the `--no-header` option is given.
 > - Extra fields after the `club` field.
 
@@ -69,7 +69,7 @@ Verify that all the participants are found from the ratings list:
 
 Warning is shown for each player who
 - is not found from the ratings list, or
-- has no chess license (if the `--license` option is given).
+- has no chess license and has played over 11 games (if the `--license` option is given).
 
 Fix the participant data manually if needed.
 
@@ -89,7 +89,7 @@ The files are created in `data/output/tournament-*.trf`.
 
 - Log in to ChessManager.
 - Select **New Tournament**.
-- Select **Import From File**, and choose the generated TRF file from the `data/output` directory.
+- Select **Import From File**, and choose a generated TRF file from the `data/output` directory.
 
 Once the first round has started, add _Club_ for each player if needed.
 
