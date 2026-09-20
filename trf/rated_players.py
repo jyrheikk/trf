@@ -22,7 +22,6 @@ class RatedPlayers:
             if not player:
                 player = participant.search(self.players, only_name=True)
             if not player:
-                print(f'Not found: {participant.last_name}')
                 player = Player(
                     participant.first_name,
                     participant.last_name,
