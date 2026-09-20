@@ -46,16 +46,22 @@ See the [Tournament Report File format](https://github.com/echecsjs/trf/blob/mai
 3. Create the **list of participants** (in the `data/input/players.csv` file):
 
 ```csv
-surname,first,club
+surname,first,club,first rating
 Heikkinen,Jyrki,LauttSSK
-Koivusipilä,Hannes,LauttSSK
+Sindarov,Javokhir,,2778
 ```
+
+If a player doesn't have a rating, enter her "first rating" if it differs from the default value. In Finland, the first rating in the first rated tournament is
+- Elo rating,
+- 1325 (U10),
+- 1425 (U14), or
+- 1525 (default).
 
 > [!NOTE]
 > The names are case-insensitive.
 > The following data in the participants file are **ignored**:
 > - The first line (header) unless the `--no-header` option is given.
-> - Extra fields after the `club` field.
+> - Extra fields after the `first rating` field.
 
 For example, if participants are in Google Sheet,
 - export them as CSV, and
