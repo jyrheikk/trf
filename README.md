@@ -46,12 +46,12 @@ See the [Tournament Report File format](https://github.com/echecsjs/trf/blob/mai
 3. Create the **list of participants** (in the `data/input/players.csv` file):
 
 ```csv
-surname,first,club,first rating
+surname,first,club,initial rating
 Heikkinen,Jyrki,LauttSSK
 Sindarov,Javokhir,,2778
 ```
 
-If a player doesn't have a rating, enter her "first rating" if it differs from the default value. In Finland, the first rating in the first rated tournament is
+Set the initial rating for a new player if needed. In Finland, it is
 - Elo rating,
 - 1325 (U10),
 - 1425 (U14), or
