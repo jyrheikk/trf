@@ -1,5 +1,4 @@
 import urllib.request
-from pathlib import Path
 
 from trf.csv import parse_csv
 from trf.player import Player
@@ -36,7 +35,6 @@ class RatedPlayers:
         url = 'https://www.shakki.net/selo/selolista.csv'
         with urllib.request.urlopen(url) as response:
             content = response.read().decode('latin-1')
-        file_path = Path(ratings_file)
-        create_directory(file_path.parent)
+        create_directory(ratings_file)
         with open(ratings_file, 'w', encoding='utf-8') as outfile:
             outfile.write(content)

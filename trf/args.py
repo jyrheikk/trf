@@ -4,12 +4,11 @@ from pathlib import Path
 from trf.log import fatal
 
 INPUT_DIR = 'data/input'
-
 DEFAULT_TOURNAMENT_FILE = f'{INPUT_DIR}/tournament.trf'
-
 DEFAULT_PLAYERS_FILE = f'{INPUT_DIR}/players.csv'
-
 DEFAULT_RATINGS_FILE = f'{INPUT_DIR}/selolista.csv'
+
+DEFAULT_OUTPUT_DIR = 'data/output'
 
 def parse_args(argv = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -34,6 +33,13 @@ def parse_args(argv = None) -> argparse.Namespace:
         '-n', '--no-header',
         action='store_true',
         help='do not skip the first line of the players file'
+    )
+    players.add_argument(
+        '-o', '--output-dir',
+        type=str,
+        metavar='DIRECTORY',
+        default=DEFAULT_OUTPUT_DIR,
+        help=f'name of the output directory for tournament TRF files (default {DEFAULT_OUTPUT_DIR})'
     )
     players.add_argument(
         '-p', '--players-file',

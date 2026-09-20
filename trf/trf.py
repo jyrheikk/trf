@@ -1,22 +1,22 @@
 import os
+from pathlib import Path
 from string import ascii_uppercase as ASCII
 
 from trf.log import ok
 from trf.player import Player
 
-OUTPUT_DIR = 'data/output'
-
 GROUP_ID = '{GROUP}'
 
-TRF_PLAYER_ID = '001'
+TRF_PLAYER_TAG = '001'
 
-def create_trf(players: list[Player], group_ends: list[int], tournament: str) -> None:
+def create_trf(players: list[Player], group_ends: list[int], tournament: str, output_dir: str) -> None:
     with open(tournament) as file:
         tournament_info = file.read()
     groups = create_groups(players, group_ends, tournament_info)
-    create_directory(OUTPUT_DIR)
     for i, group in enumerate(groups):
-        filename = f'{OUTPUT_DIR}/tournament-{ASCII[i]}.trf'
+        filename = f'{output_dir}/tournament-{ASCII[i]}.trf'
+        if i == 0:
+            create_directory(filename)
         with open(filename, 'w', encoding='utf-8') as outfile:
             outfile.write(group['data'])
             ok(f'Created {filename} ({group['player_count']} players)')
@@ -47,9 +47,10 @@ def create_players(players: list[Player], omit_id = False) -> str:
     return trf
 
 def __format_player(player: Player, index: int, omit_id) -> str:
-    id_field = '' if omit_id else f'{TRF_PLAYER_ID:<7}'
+    id_field = '' if omit_id else f'{TRF_PLAYER_TAG:<7}'
     return f'{id_field}{index:<7}{player.name:<34}{player.rating}'
 
-def create_directory(path: str) -> None:
-    if not os.path.exists(path):
-        os.makedirs(path)
+def create_directory(filename: str) -> None:
+    parent = Path(filename).parent
+    if not os.path.exists(parent):
+        os.makedirs(parent)

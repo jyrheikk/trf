@@ -20,7 +20,7 @@ def handle_players(args: argparse.Namespace) -> None:
     players = get_players(args)
     if (args.groups):
         validate_groups(args, len(players))
-        create_trf(players, args.groups, args.tournament_file)
+        create_trf(players, args.groups, args.tournament_file, args.output_dir)
     else:
         check_valid_players(players, args)
         list_players(players)
