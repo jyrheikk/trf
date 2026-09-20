@@ -3,13 +3,6 @@ from pytest import CaptureFixture
 
 from trf.args import parse_args, validate_args
 
-DOWNLOAD_ARG = ['--download-ratings']
-GROUPS_ARG = ['--groups', '16', '32']
-NO_HEADER_ARG = ['--no-header']
-PLAYERS_ARG = ['--players-file', 'test/data/test-players.csv']
-TOURNAMENT_ARG = ['--tournament-file', 'data/samples/tournament.trf']
-WITHOUT_RATINGS_ARG = ['--without-ratings']
-
 @pytest.mark.parametrize('option', ['-h', '--help'])
 def test_validate_args_show_help(capsys: CaptureFixture[str], option: str) -> None:
     assert_args_msg(
@@ -18,17 +11,41 @@ def test_validate_args_show_help(capsys: CaptureFixture[str], option: str) -> No
         'show this help message'
     )
 
+def test_validate_args_download_ratings_succeeds(capsys: CaptureFixture[str]) -> None:
+    assert_args_ok(
+        capsys,
+        [
+            '--download-ratings',
+            *['--ratings-file', 'test/data/test-ratings.csv']
+        ]
+    )
+
+def test_validate_args_list_players_succeeds(capsys: CaptureFixture[str]) -> None:
+    assert_args_ok(
+        capsys,
+        [
+            '--exclude-ratings',
+            '--license',
+            '--no-header',
+            *['--players-file', 'test/data/test-players.csv']
+        ]
+    )
+
 def test_validate_args_create_tournament_succeeds(capsys: CaptureFixture[str]) -> None:
     assert_args_ok(
         capsys,
-        [*GROUPS_ARG, *NO_HEADER_ARG, *PLAYERS_ARG, *TOURNAMENT_ARG, *WITHOUT_RATINGS_ARG]
+        [
+            *['--groups', '16', '32'],
+            *['--output-dir', 'test/data/output'],
+            *['--tournament-file', 'data/samples/tournament.trf']
+        ]
     )
 
 @pytest.mark.parametrize('filename', ['non-existing-file.csv'])
 def test_validate_args_filename(capsys: CaptureFixture[str], filename: str) -> None:
     assert_args_msg(
         capsys,
-        [PLAYERS_ARG[0], filename],
+        ['--players-file', filename],
         f'File not found: {filename}'
     )
 
