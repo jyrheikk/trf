@@ -13,7 +13,7 @@ class Player:
         self.last_name = last_name
         self.rating = rating
         self.club = Player.parse_club(club)
-        self.has_license = False
+        self.needs_license = False
         self.is_new = False
         self.__set_helper_fields()
 
@@ -26,8 +26,8 @@ class Player:
         self.__search_name = self.name.lower()
         self.__search_name_club = self.name_club.lower()
 
-    def set_license(self) -> None:
-        self.has_license = True
+    def set_needs_license(self) -> None:
+        self.needs_license = True
 
     def set_new(self) -> None:
         self.is_new = True
