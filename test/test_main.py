@@ -8,7 +8,7 @@ EXPECTED_LIST_OUTPUT = [
     'Is new player: Player, New',
     '1      Heikkinen, Jyrki                  2047',
     '2      Casual, John                      1558',
-    '3      Player, New                       1525',
+    '3      Player, New                       1425',
     '4      Beginner, Real                    1298',
     '(--groups 2 4)'
 ]

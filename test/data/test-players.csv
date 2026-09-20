@@ -1,5 +1,5 @@
-surname,first,club
-Heikkinen,Jyrki,lauttssk
+surname,first,club,rating
+Heikkinen,Jyrki,lauttssk,
 Casual,John,
 Beginner,Real,
-Player,New,
+Player,New,,1425
