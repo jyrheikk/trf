@@ -27,7 +27,7 @@ def handle_players(args: argparse.Namespace) -> None:
 
 def get_players(args: argparse.Namespace) -> list[Player]:
     participants = parse_csv(args.players_file, header=not args.no_header)
-    if args.without_ratings:
+    if args.exclude_ratings:
         return participants
     rated_players = RatedPlayers(args.ratings_file)
     return rated_players.search_all(participants)

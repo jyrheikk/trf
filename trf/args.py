@@ -16,14 +16,26 @@ def parse_args(argv = None) -> argparse.Namespace:
         description='Create Tournament Report Files (TRF) for a chess tournament'
     )
 
-    download = parser.add_argument_group('download ratings (+ --ratings option)')
+    download = parser.add_argument_group('download ratings')
     download.add_argument(
         '-d', '--download-ratings',
         action='store_true',
         help='download the latest ratings file'
     )
+    download.add_argument(
+        '-r', '--ratings-file',
+        type=str,
+        metavar='RATINGS.CSV',
+        default=DEFAULT_RATINGS_FILE,
+        help=f'name of the ratings CSV file (default {DEFAULT_RATINGS_FILE})'
+    )
 
-    players = parser.add_argument_group('list players')
+    players = parser.add_argument_group('list players (and --ratings-file)')
+    players.add_argument(
+        '-e', '--exclude-ratings',
+        action='store_true',
+        help='skip searching players from the ratings file'
+    )
     players.add_argument(
         '-l', '--license',
         action='store_true',
@@ -35,39 +47,27 @@ def parse_args(argv = None) -> argparse.Namespace:
         help='do not skip the first line of the players file'
     )
     players.add_argument(
-        '-o', '--output-dir',
-        type=str,
-        metavar='DIRECTORY',
-        default=DEFAULT_OUTPUT_DIR,
-        help=f'name of the output directory for tournament TRF files (default {DEFAULT_OUTPUT_DIR})'
-    )
-    players.add_argument(
         '-p', '--players-file',
         type=str,
         metavar='PLAYERS.CSV',
         default=DEFAULT_PLAYERS_FILE,
         help=f'name of the players CSV file (default {DEFAULT_PLAYERS_FILE})'
     )
-    players.add_argument(
-        '-r', '--ratings-file',
-        type=str,
-        metavar='RATINGS.CSV',
-        default=DEFAULT_RATINGS_FILE,
-        help=f'name of the ratings CSV file (default {DEFAULT_RATINGS_FILE})'
-    )
-    players.add_argument(
-        '-w', '--without-ratings',
-        action='store_true',
-        help='list players without ratings'
-    )
 
-    create = parser.add_argument_group('create Tournament Report Files (+ list players options)')
+    create = parser.add_argument_group('create Tournament Report Files (and list players options)')
     create.add_argument(
         '-g', '--groups',
         type=int,
         metavar='INDEX',
         nargs='*',
         help='indexes of the last player in each group'
+    )
+    create.add_argument(
+        '-o', '--output-dir',
+        type=str,
+        metavar='DIRECTORY',
+        default=DEFAULT_OUTPUT_DIR,
+        help=f'name of the output directory for tournament TRF files (default {DEFAULT_OUTPUT_DIR})'
     )
     create.add_argument(
         '-t', '--tournament-file',
