@@ -22,7 +22,7 @@ def parse_csv(filename: str, header: bool, delim = ',', leading_fields = 0, rati
                 last_name=get_value(LAST_NAME, row),
                 first_name=get_value(FIRST_NAME, row),
                 club=get_value(CLUB, row),
-                rating=get_value(RATING, row) if rating else '',
+                rating=get_value(RATING, row)
             )
             if rating and get_value(LICENSE, row) != 'L' and int(get_value(RATED_GAMES, row)) > FREE_GAMES:
                 p.set_needs_license()

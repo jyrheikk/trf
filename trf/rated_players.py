@@ -25,6 +25,7 @@ class RatedPlayers:
                     participant.first_name,
                     participant.last_name,
                     club=participant.club,
+                    rating=participant.rating,
                 )
                 player.set_new()
             found.append(player)
