@@ -2,8 +2,6 @@ import csv
 
 from trf.player import Player
 
-FREE_GAMES = 10
-
 class PlayersParser:
     def __init__(self):
         self.LAST_NAME = 0
