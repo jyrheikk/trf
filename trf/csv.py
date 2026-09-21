@@ -24,8 +24,10 @@ def parse_csv(filename: str, header: bool, delim = ',', leading_fields = 0, rati
                 club=get_value(CLUB, row),
                 rating=get_value(RATING, row)
             )
-            if rating and get_value(LICENSE, row) != 'L' and int(get_value(RATED_GAMES, row)) > FREE_GAMES:
-                p.set_needs_license()
+            if rating and get_value(LICENSE, row) != 'L':
+                games = get_value(RATED_GAMES, row)
+                if games and int(games) > FREE_GAMES:
+                    p.set_needs_license()
             result.append(p)
         return result
 
