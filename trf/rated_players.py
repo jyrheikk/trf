@@ -10,8 +10,7 @@ class RatedPlayers:
             ratings_file,
             header=True,
             delim=';',
-            leading_fields=3,
-            rating=True
+            leading_fields=3
         )
 
     def search_all(self, participants: list[Player]) -> list[Player]:
