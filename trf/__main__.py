@@ -3,9 +3,9 @@
 import argparse
 
 from trf.args import parse_args, validate_args, validate_groups
-from trf.csv import parse_csv
 from trf.log import info, ok, warn
 from trf.player import Player
+from trf.players_parser import PlayersParser
 from trf.rated_players import RatedPlayers
 from trf.trf import create_players, create_trf
 
@@ -26,7 +26,8 @@ def handle_players(args: argparse.Namespace) -> None:
         list_players(players)
 
 def get_players(args: argparse.Namespace) -> list[Player]:
-    participants = parse_csv(args.players_file, header=not args.no_header)
+    parser = PlayersParser()
+    participants = parser.parse(args.players_file, header=not args.no_header)
     if args.exclude_ratings:
         return participants
     rated_players = RatedPlayers(args.ratings_file)
