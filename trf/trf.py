@@ -46,9 +46,17 @@ def create_players(players: list[Player], omit_id = False) -> str:
         trf.append(__format_player(p, i + 1, omit_id))
     return trf
 
+EMPTY = ''
+
 def __format_player(player: Player, index: int, omit_id) -> str:
-    id_field = '' if omit_id else f'{TRF_PLAYER_TAG:<7}'
-    return f'{id_field}{index:<7}{player.name:<34}{player.rating}'
+    tag = '' if omit_id else f'{TRF_PLAYER_TAG:<3}'
+    fide_number = f'{EMPTY:<3} {player.fide_number:>11}' if player.fide_number else ''
+    return (
+        f'{tag} {index:>4} '
+        f'{EMPTY:<1}{EMPTY:<3} '
+        f'{player.name:<33} {player.rating:>4}' +
+        fide_number
+    )
 
 def create_directory(filename: str) -> None:
     parent = Path(filename).parent

@@ -11,6 +11,7 @@ def parse_csv(filename: str, header: bool, delim = ',', leading_fields = 0, rati
     RATING = 3 + leading_fields
     RATED_GAMES = 4 + leading_fields
     LICENSE = 13 + leading_fields
+    FIDE_NUMBER = 1 # only in the ratings list
 
     with open(filename, encoding='utf-8') as file:
         reader = csv.reader(file, delimiter=delim)
@@ -28,6 +29,10 @@ def parse_csv(filename: str, header: bool, delim = ',', leading_fields = 0, rati
                 games = get_value(RATED_GAMES, row)
                 if games and int(games) > FREE_GAMES:
                     p.set_needs_license()
+            if leading_fields > 0:
+                fide_number = get_value(FIDE_NUMBER, row)
+                if fide_number:
+                    p.set_fide_number(fide_number)
             result.append(p)
         return result
 

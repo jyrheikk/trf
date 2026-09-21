@@ -8,11 +8,12 @@ UNOFFICIAL_CLUB = '/'
 INACTIVE_SUFFIX = ' #'
 
 class Player:
-    def __init__(self, first_name: str, last_name: str, rating = DEFAULT_RATING, club = ''):
+    def __init__(self, first_name: str, last_name: str, rating = '', club = ''):
         self.first_name = first_name
         self.last_name = last_name
-        self.rating = rating
+        self.rating = rating or DEFAULT_RATING
         self.club = Player.parse_club(club)
+        self.fide_number = ''
         self.needs_license = False
         self.is_new = False
         self.__set_helper_fields()
@@ -25,6 +26,9 @@ class Player:
         self.name_rating = f'{self.name_club} {self.rating}'
         self.__search_name = self.name.lower()
         self.__search_name_club = self.name_club.lower()
+
+    def set_fide_number(self, fide_number: str) -> None:
+        self.fide_number = fide_number
 
     def set_needs_license(self) -> None:
         self.needs_license = True
