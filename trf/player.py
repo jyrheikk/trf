@@ -1,18 +1,15 @@
+from trf.club import parse_club
 from trf.log import fatal
 from trf.search import binary_search
 
 DEFAULT_RATING = '1525'
-
-NO_CLUB = '-'
-UNOFFICIAL_CLUB = '/'
-INACTIVE_SUFFIX = ' #'
 
 class Player:
     def __init__(self, first_name: str, last_name: str, rating = '', club = ''):
         self.first_name = first_name
         self.last_name = last_name
         self.rating = rating or DEFAULT_RATING
-        self.club = Player.parse_club(club)
+        self.club = parse_club(club)
         self.fide_number = ''
         self.needs_license = False
         self.is_new = False
@@ -65,12 +62,3 @@ class Player:
         if i > -1 and i < len(players) and self.__search_name == players[i].__search_name:
             return players[i]
         return None
-
-    @staticmethod
-    def parse_club(club: str) -> str:
-        if club == NO_CLUB or UNOFFICIAL_CLUB in club:
-            return ''
-        elif club.endswith(INACTIVE_SUFFIX):
-            return club[:-len(INACTIVE_SUFFIX)]
-        else:
-            return club

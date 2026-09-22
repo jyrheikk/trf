@@ -9,14 +9,6 @@ RATINGS = [
     Player('Random', 'Surname', '1500', 'X')
 ]
 
-@pytest.mark.parametrize('club', ['LauttSSK', 'LauttSSK #'])
-def test_parse_club(club: str) -> None:
-    assert Player.parse_club(club) == 'LauttSSK'
-
-@pytest.mark.parametrize('club', ['KJ/Lauttasaari', '-', ''])
-def test_parse_club_to_empty(club: str) -> None:
-    assert Player.parse_club('KJ/Lauttasaari') == ''
-
 def test_set_needs_license() -> None:
     p = Player('random', 'surname')
     p.set_needs_license()
