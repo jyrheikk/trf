@@ -3,7 +3,7 @@ from trf.players_parser import PlayersParser
 
 FREE_GAMES = 10
 
-class RatingsListParser(PlayersParser):
+class RatingListParser(PlayersParser):
     def __init__(self):
         self.FIDE_NUMBER = 1
         self.LAST_NAME = 3

@@ -6,12 +6,12 @@ from trf.args import parse_args, validate_args, validate_groups
 from trf.log import info, ok, warn
 from trf.player import Player
 from trf.players_parser import PlayersParser
-from trf.rated_players import RatedPlayers
+from trf.rating_list import RatingList
 from trf.trf import create_players, create_trf
 
 def main(args: argparse.Namespace) -> None:
     if args.download_ratings:
-        RatedPlayers.download(args.ratings_file)
+        RatingList.download(args.ratings_file)
         ok(f'Fetched the latest ratings in {args.ratings_file}')
     else:
         handle_players(args)
@@ -30,8 +30,8 @@ def get_players(args: argparse.Namespace) -> list[Player]:
     participants = parser.parse(args.players_file, header=not args.no_header)
     if args.exclude_ratings:
         return participants
-    rated_players = RatedPlayers(args.ratings_file)
-    return rated_players.search_all(participants)
+    rating_list = RatingList(args.ratings_file)
+    return rating_list.search(participants)
 
 def check_valid_players(players: list[Player], args: argparse.Namespace) -> None:
     for p in players:

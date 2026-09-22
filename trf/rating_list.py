@@ -1,15 +1,15 @@
 import urllib.request
 
 from trf.player import Player
-from trf.ratings_list_parser import RatingsListParser
+from trf.rating_list_parser import RatingListParser
 from trf.trf import create_directory
 
-class RatedPlayers:
+class RatingList:
     def __init__(self, ratings_file: str):
-        parser = RatingsListParser()
+        parser = RatingListParser()
         self.players = parser.parse(ratings_file, header=True)
 
-    def search_all(self, participants: list[Player]) -> list[Player]:
+    def search(self, participants: list[Player]) -> list[Player]:
         found = []
         for participant in participants:
             player = participant.search(self.players)

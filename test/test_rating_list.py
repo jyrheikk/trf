@@ -1,10 +1,10 @@
 from trf.player import Player
-from trf.rated_players import RatedPlayers
+from trf.rating_list import RatingList
 
 TEST_RATINGS = 'test/data/test-ratings.csv'
 
-def test_search_all() -> None:
-    rated = RatedPlayers(TEST_RATINGS)
+def test_search() -> None:
+    rating_list = RatingList(TEST_RATINGS)
     participants = [
         Player('jyrki', 'heikkinen', '', 'lauttssk'),
         Player('Somebody', 'Not Rated')
@@ -13,4 +13,4 @@ def test_search_all() -> None:
         Player('Jyrki', 'Heikkinen', '2047', 'LauttSSK'),
         Player('Somebody', 'Not Rated', '1525')
     ]
-    assert rated.search_all(participants) == expected
+    assert rating_list.search(participants) == expected
