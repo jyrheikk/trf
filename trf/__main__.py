@@ -7,11 +7,12 @@ from trf.log import info, ok, warn
 from trf.player import Player
 from trf.players_parser import PlayersParser
 from trf.rating_list import RatingList
+from trf.rating_list_parser import RatingListParser
 from trf.trf import create_players, create_trf
 
 def main(args: argparse.Namespace) -> None:
     if args.download_ratings:
-        RatingList.download(args.ratings_file)
+        RatingListParser.download(args.ratings_file)
         ok(f'Fetched the latest ratings in {args.ratings_file}')
     else:
         handle_players(args)

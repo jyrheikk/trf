@@ -1,5 +1,8 @@
+import urllib.request
+
 from trf.player import Player
 from trf.players_parser import PlayersParser
+from trf.trf import create_directory
 
 FREE_GAMES = 10
 
@@ -21,3 +24,12 @@ class RatingListParser(PlayersParser):
         fide_number = self.get_value(self.FIDE_NUMBER, row)
         if fide_number:
             player.set_fide_number(fide_number)
+
+    @staticmethod
+    def download(ratings_file: str) -> None:
+        url = 'https://www.shakki.net/selo/selolista.csv'
+        with urllib.request.urlopen(url) as response:
+            content = response.read().decode('latin-1')
+        create_directory(ratings_file)
+        with open(ratings_file, 'w', encoding='utf-8') as outfile:
+            outfile.write(content)

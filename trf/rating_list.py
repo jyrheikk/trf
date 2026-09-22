@@ -1,10 +1,7 @@
-import urllib.request
-
 from trf.log import fatal
 from trf.player import Player
 from trf.rating_list_parser import RatingListParser
 from trf.search import binary_search
-from trf.trf import create_directory
 
 class RatingList:
     def __init__(self, ratings_file: str):
@@ -52,12 +49,3 @@ class RatingList:
         if i > -1 and i < len(self.players) and p.search_name == self.players[i].search_name:
             return self.players[i]
         return None
-
-    @staticmethod
-    def download(ratings_file: str) -> None:
-        url = 'https://www.shakki.net/selo/selolista.csv'
-        with urllib.request.urlopen(url) as response:
-            content = response.read().decode('latin-1')
-        create_directory(ratings_file)
-        with open(ratings_file, 'w', encoding='utf-8') as outfile:
-            outfile.write(content)
