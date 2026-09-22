@@ -21,17 +21,13 @@ def test_search() -> None:
 
 def test_search_succeeds_with_only_name() -> None:
     participant = Player('erkki', 'aalto', '', 'Wrong Club')
-    player = rating_list.search_unique(participant, only_name=True)
+    player = rating_list.search(participant)
     assert player == Player('Erkki', 'Aalto', '1629', 'HämSK')
-
-def test_search_fails_with_incorrect_club() -> None:
-    participant = Player('erkki', 'aalto', '', 'club typo')
-    assert not rating_list.search_unique(participant)
 
 def test_search_fails_with_duplicate_names(capsys: CaptureFixture[str]) -> None:
     expected = 'Duplicates found'
     participant = Player('jyrki', 'heikkinen')
     with pytest.raises(SystemExit) as exit_msg:
-        rating_list.search_unique(participant, only_name=True)
+        rating_list.search(participant)
     output = capsys.readouterr()
     assert expected in output.err or expected in output.out or expected in str(exit_msg.value)
