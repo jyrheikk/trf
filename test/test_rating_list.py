@@ -13,4 +13,4 @@ def test_search() -> None:
         Player('Jyrki', 'Heikkinen', '2047', 'LauttSSK'),
         Player('Somebody', 'Not Rated', '1525')
     ]
-    assert rating_list.search(participants) == expected
+    assert rating_list.search_all(participants) == expected

@@ -31,7 +31,7 @@ def get_players(args: argparse.Namespace) -> list[Player]:
     if args.exclude_ratings:
         return participants
     rating_list = RatingList(args.ratings_file)
-    return rating_list.search(participants)
+    return rating_list.search_all(participants)
 
 def check_valid_players(players: list[Player], args: argparse.Namespace) -> None:
     for p in players:

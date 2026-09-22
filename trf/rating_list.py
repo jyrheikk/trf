@@ -9,22 +9,25 @@ class RatingList:
         parser = RatingListParser()
         self.players = parser.parse(ratings_file, header=True)
 
-    def search(self, participants: list[Player]) -> list[Player]:
+    def search_all(self, participants: list[Player]) -> list[Player]:
         found = []
-        for participant in participants:
-            player = participant.search(self.players)
-            if not player:
-                player = participant.search(self.players, only_name=True)
-            if not player:
-                player = Player(
-                    participant.first_name,
-                    participant.last_name,
-                    club=participant.club,
-                    rating=participant.rating,
-                )
-                player.set_new()
-            found.append(player)
+        for p in participants:
+            found.append(self.search(p))
         return sorted(found, key=lambda p: p.rating, reverse=True)
+
+    def search(self, participant: Player) -> Player:
+        player = participant.search(self.players)
+        if not player:
+            player = participant.search(self.players, only_name=True)
+        if not player:
+            player = Player(
+                participant.first_name,
+                participant.last_name,
+                club=participant.club,
+                rating=participant.rating,
+            )
+            player.set_new()
+        return player
 
     @staticmethod
     def download(ratings_file: str) -> None:
