@@ -22,12 +22,7 @@ class RatingList:
         if not player:
             player = self.search_unique(participant, only_name=True)
         if not player:
-            player = Player(
-                participant.first_name,
-                participant.last_name,
-                club=participant.club,
-                rating=participant.rating,
-            )
+            player = participant
             player.set_new()
         return player
 
