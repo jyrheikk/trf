@@ -1,5 +1,12 @@
 # Create chess Tournament Report Files (TRF)
 
+## Features
+
+- Creates Tournament Report Files for the given number of groups to be played, using the given
+   - tournament information file, and
+   - the list of participants.
+- Adds a rating and FIDE number for each player from the fetched ratings list.
+
 ## Prerequisites
 
 - Create an account in [ChessManager](https://chessmanager.com/).
@@ -11,7 +18,7 @@
 
 ## Creating the input data
 
-1. Create your customized **tournament info**:
+1. Create your customized **tournament information**:
 - Create a file named `data/input/tournament.trf`.
 - Reuse the `data/samples/tournament.trf` template if needed.
 
@@ -43,7 +50,7 @@ See the [Tournament Report File format](https://github.com/echecsjs/trf/blob/mai
 ./trfx --download
 ```
 
-3. Create the **list of participants** (in the `data/input/players.csv` file):
+3. Create the **list of participants** (in the `data/input/players.csv` file) that includes the following fields:
 
 ```csv
 surname,first,club,initial rating
@@ -51,19 +58,17 @@ Heikkinen,Jyrki,LauttSSK
 Sindarov,Javokhir,,2778
 ```
 
+The names are case-insensitive. The following data are _ignored_:
+- The first line (header) unless the `--no-header` option is given.
+- Extra fields after the `initial rating` field.
+
 Set the initial rating for a new player if needed. In Finland, it is
 - Elo rating,
 - 1325 (U10),
 - 1425 (U14), or
 - 1525 (default).
 
-> [!NOTE]
-> The names are case-insensitive.
-> The following data in the participants file are **ignored**:
-> - The first line (header) unless the `--no-header` option is given.
-> - Extra fields after the `first rating` field.
-
-For example, if participants are in Google Sheet,
+For example, if the participants are in Google Sheet,
 - export them as CSV, and
 - verify that the order of fields is correct.
 
@@ -75,7 +80,7 @@ Verify that all the participants are found from the ratings list:
 
 Warning is shown for each player who
 - is not found from the ratings list, or
-- has no chess license and has played over 11 games (if the `--license` option is given).
+- needs a chess license (has none, and has played over 10 games) if the `--license` option is given.
 
 Fix the participant data manually if needed.
 
