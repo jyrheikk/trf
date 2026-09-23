@@ -8,7 +8,7 @@ TEST_RATINGS = 'test/data/test-ratings.csv'
 
 rating_list = RatingList(TEST_RATINGS)
 
-def test_search() -> None:
+def test_search_all() -> None:
     participants = [
         Player('jyrki', 'heikkinen', '', 'lauttssk'),
         Player('Somebody', 'Not Rated')
