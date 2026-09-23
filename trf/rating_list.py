@@ -14,24 +14,22 @@ class RatingList:
             found.append(self.search(p))
         return sorted(found, key=lambda p: p.rating, reverse=True)
 
-    def search(self, participant: Player) -> Player:
-        player = self.search_unique(participant)
+    def search(self, p: Player) -> Player:
+        player = self.search_unique(p) or self.search_unique(p, by_name=True)
         if not player:
-            player = self.search_unique(participant, only_name=True)
-        if not player:
-            player = participant
+            player = p
             player.set_new()
         return player
 
-    def search_unique(self, p: Player, only_name = False) -> Player | None:
+    def search_unique(self, p: Player, by_name = False) -> Player | None:
         i = binary_search(
             self.players,
-            p.search_name if only_name else p.search_name_club,
-            key=lambda x: x.search_name if only_name else x.search_name_club
+            p.search_name if by_name else p.search_name_club,
+            key=lambda x: x.search_name if by_name else x.search_name_club
         )
         if i == -1:
             return None
-        elif only_name:
+        elif by_name:
             self.verify_unique_name(p, i)
         return self.players[i]
 
@@ -46,6 +44,6 @@ class RatingList:
             )
 
     def search_duplicate(self, p: Player, i: int) -> Player | None:
-        if i > -1 and i < len(self.players) and p.search_name == self.players[i].search_name:
+        if i > -1 and i < len(self.players) and self.players[i].is_namesake(p):
             return self.players[i]
         return None

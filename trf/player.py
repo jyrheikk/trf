@@ -27,5 +27,8 @@ class Player:
     def set_new(self) -> None:
         self.is_new = True
 
-    def __eq__(self, other) -> bool:
-        return self.search_name == other.search_name and self.rating == other.rating
+    def __eq__(self, p: Player) -> bool:
+        return self.is_namesake(p) and self.rating == p.rating
+
+    def is_namesake(self, p: Player) -> bool:
+        return self.search_name == p.search_name
