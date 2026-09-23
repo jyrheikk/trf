@@ -23,7 +23,7 @@ class RatingList:
 
     def search_unique(self, p: Player, by_name = False) -> Player | None:
         def key(x: Player) -> str:
-            return x.search_name if by_name else x.search_name_club
+            return x.get_search_key(by_name)
         i = binary_search(self.players, key(p), key=key)
         if i == -1:
             return None

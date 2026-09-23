@@ -10,25 +10,28 @@ class Player:
         self.club = parse_club(club)
         self.needs_license = False
         self.is_new = False
-        self.__set_helper_fields()
+        self.__set_combined_fields()
 
-    def __set_helper_fields(self) -> None:
+    def __set_combined_fields(self) -> None:
         optional_first_name = f', {self.first_name}' if self.first_name else ''
         self.name = f'{self.last_name}{optional_first_name}'
         optional_club = f' ({self.club})' if self.club else ''
         self.name_club = f'{self.name}{optional_club}'
         self.name_rating = f'{self.name_club} {self.rating}'
-        self.search_name = self.name.lower()
-        self.search_name_club = self.name_club.lower()
+        self.__search_name = self.name.lower()
+        self.__search_name_club = self.name_club.lower()
+
+    def __eq__(self, p: Player) -> bool:
+        return self.is_namesake(p) and self.rating == p.rating
+
+    def get_search_key(self, by_name = False) -> str:
+        return self.__search_name if by_name else self.__search_name_club
+
+    def is_namesake(self, p: Player) -> bool:
+        return self.__search_name == p.__search_name
 
     def set_needs_license(self) -> None:
         self.needs_license = True
 
     def set_new(self) -> None:
         self.is_new = True
-
-    def __eq__(self, p: Player) -> bool:
-        return self.is_namesake(p) and self.rating == p.rating
-
-    def is_namesake(self, p: Player) -> bool:
-        return self.search_name == p.search_name
