@@ -5,7 +5,7 @@
 - Creates Tournament Report Files for the given number of groups to be played, using the given
    - tournament information file, and
    - list of participants.
-- Adds a rating and FIDE number for each player from the fetched ratings list.
+- Adds a rating for each player from the fetched ratings list.
 
 ## Prerequisites
 

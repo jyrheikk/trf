@@ -6,7 +6,7 @@ from trf.args import parse_args
 EXPECTED_LIST_OUTPUT = [
     'No license: Casual, John (MatSK)',
     'Is new player: Player, New',
-    '1      Heikkinen, Jyrki                  2047         501301',
+    '1      Heikkinen, Jyrki                  2047',
     '2      Casual, John                      1558',
     '3      Player, New                       1425',
     '4      Beginner, Real                    1298',

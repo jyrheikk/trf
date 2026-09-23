@@ -50,12 +50,10 @@ EMPTY = ''
 
 def __format_player(player: Player, index: int, omit_id) -> str:
     tag = '' if omit_id else f'{TRF_PLAYER_TAG:<3}'
-    fide_number = f'{EMPTY:<3} {player.fide_number:>11}' if player.fide_number else ''
     return (
         f'{tag} {index:>4} '
         f'{EMPTY:<1}{EMPTY:<3} '
-        f'{player.name:<33} {player.rating:>4}' +
-        fide_number
+        f'{player.name:<33} {player.rating:>4}'
     )
 
 def create_directory(filename: str) -> None:
