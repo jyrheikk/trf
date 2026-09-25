@@ -9,8 +9,9 @@ EXPECTED_LIST_OUTPUT = [
     '1      Heikkinen, Jyrki                  2047',
     '2      Casual, John                      1558',
     '3      Player, New                       1425',
-    '4      Beginner, Real                    1298',
-    '(--groups 2 4)'
+    "4      D'Amato, Carolina                 1409",
+    '5      Beginner, Real                    1298',
+    '(--groups 2 5)'
 ]
 
 ARGS = [
@@ -39,7 +40,7 @@ def test_create_tournament(capsys: CaptureFixture[str]) -> None:
     output = capsys.readouterr()
     expected = [
         'Created test/data/output/tournament-A.trf (2 players)',
-        'Created test/data/output/tournament-B.trf (2 players)'
+        'Created test/data/output/tournament-B.trf (3 players)'
     ]
     for row in expected:
         assert row in output.out
