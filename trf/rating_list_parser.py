@@ -25,7 +25,7 @@ class RatingListParser(PlayersParser):
     def download(ratings_file: str) -> None:
         url = 'https://www.shakki.net/selo/selolista.csv'
         with urllib.request.urlopen(url) as response:
-            content = response.read().decode('latin-1')
+            content = response.read().decode('windows-1252')
         create_directory(ratings_file)
         with open(ratings_file, 'w', encoding='utf-8') as outfile:
             outfile.write(content)

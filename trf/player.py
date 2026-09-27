@@ -2,7 +2,7 @@ from trf.club import parse_club
 
 DEFAULT_RATING = '1525'
 
-SINGLE_QUOTE = '\u0092'
+APOSTROPHE = '’' # noqa
 
 class Player:
     def __init__(self, first_name: str, last_name: str, rating = '', club = ''):
@@ -25,11 +25,11 @@ class Player:
 
     @staticmethod
     def human_readable(name: str) -> str:
-        return name.replace(SINGLE_QUOTE, "'")
+        return name.replace(APOSTROPHE, "'")
 
     @staticmethod
     def encode_search_name(name: str) -> str:
-        return name.replace("'", SINGLE_QUOTE)
+        return name.replace("'", APOSTROPHE)
 
     def __eq__(self, p: Player) -> bool:
         return self.is_namesake(p) and self.rating == p.rating
