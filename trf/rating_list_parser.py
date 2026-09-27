@@ -6,6 +6,8 @@ from trf.trf import create_directory
 
 FREE_GAMES = 10
 
+APOSTROPHE = '’' # noqa
+
 class RatingListParser(PlayersParser):
     def __init__(self):
         self.LAST_NAME = 3
@@ -28,4 +30,4 @@ class RatingListParser(PlayersParser):
             content = response.read().decode('windows-1252')
         create_directory(ratings_file)
         with open(ratings_file, 'w', encoding='utf-8') as outfile:
-            outfile.write(content)
+            outfile.write(content.replace(APOSTROPHE, "'"))
