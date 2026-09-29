@@ -7,6 +7,7 @@ class RatingList:
     def __init__(self, ratings_file: str):
         parser = RatingListParser()
         self.players = parser.parse(ratings_file, header=True)
+        self.players = sorted(self.players, key=lambda p: p.search_name_club)
 
     def search_all(self, participants: list[Player]) -> list[Player]:
         found = []

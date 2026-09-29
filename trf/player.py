@@ -19,13 +19,13 @@ class Player:
         self.name_club = f'{self.name}{optional_club}'
         self.name_rating = f'{self.name_club} {self.rating}'
         self.__search_name = self.name.lower()
-        self.__search_name_club = self.name_club.lower()
+        self.search_name_club = self.name_club.lower()
 
     def __eq__(self, p: Player) -> bool:
         return self.is_namesake(p) and self.rating == p.rating
 
     def get_search_key(self, by_name = False) -> str:
-        return self.__search_name if by_name else self.__search_name_club
+        return self.__search_name if by_name else self.search_name_club
 
     def is_namesake(self, p: Player) -> bool:
         return self.__search_name == p.__search_name
