@@ -4,7 +4,7 @@ from trf.player import Player
 from trf.players_parser import PlayersParser
 from trf.trf import create_directory
 
-FREE_GAMES = 10
+MAX_FREE_GAMES = 10
 
 APOSTROPHE = '’' # noqa
 
@@ -20,7 +20,7 @@ class RatingListParser(PlayersParser):
 
     def parse_optional_fields(self, row: str, player: Player) -> None:
         games = self.get_value(self.RATED_GAMES, row)
-        if self.get_value(self.LICENSE, row) != 'L' and games and int(games) > FREE_GAMES:
+        if self.get_value(self.LICENSE, row) != 'L' and games and int(games) > MAX_FREE_GAMES:
             player.set_needs_license()
 
     @staticmethod
