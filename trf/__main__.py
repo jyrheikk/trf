@@ -47,7 +47,7 @@ def check_valid_players(players: list[Player], args: argparse.Namespace) -> None
 
 def list_players(players: list[Player], args: argparse.Namespace) -> None:
     trf = TournamentReportFile(players, args.exclude_ratings)
-    contents = trf.create_players(omit_id=True)
+    contents = trf.create_players(players, omit_id=True)
     print('\n'.join(contents))
     last_group = len(players)
     first_group = last_group // 2
