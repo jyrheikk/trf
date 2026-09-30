@@ -3,9 +3,9 @@ from pathlib import Path
 
 from trf.log import fatal
 
-DEFAULT_TOURNAMENT_FILE = 'tournament.trf'
 DEFAULT_PLAYERS_FILE = 'players.csv'
 DEFAULT_RATINGS_FILE = 'selolista.csv'
+DEFAULT_TOURNAMENT_FILE = 'tournament.trf'
 
 def parse_args(argv = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -19,15 +19,8 @@ def parse_args(argv = None) -> argparse.Namespace:
         action='store_true',
         help='download the latest rating file'
     )
-    download.add_argument(
-        '-r', '--ratings-file',
-        type=str,
-        metavar='RATINGS.CSV',
-        default=DEFAULT_RATINGS_FILE,
-        help=f'name of the ratings CSV file (default {DEFAULT_RATINGS_FILE})'
-    )
 
-    players = parser.add_argument_group('list players (and --ratings-file)')
+    players = parser.add_argument_group('list players')
     players.add_argument(
         '-e', '--exclude-ratings',
         action='store_true',
@@ -50,13 +43,6 @@ def parse_args(argv = None) -> argparse.Namespace:
         action='store_true',
         help='do not skip the first line of the players file'
     )
-    players.add_argument(
-        '-p', '--players-file',
-        type=str,
-        metavar='PLAYERS.CSV',
-        default=DEFAULT_PLAYERS_FILE,
-        help=f'name of the players CSV file (default {DEFAULT_PLAYERS_FILE})'
-    )
 
     create = parser.add_argument_group('create Tournament Report Files (and list players options)')
     create.add_argument(
@@ -66,14 +52,30 @@ def parse_args(argv = None) -> argparse.Namespace:
         nargs='*',
         help='indexes of the last player in each group'
     )
-    create.add_argument(
+
+    testing = parser.add_argument_group('testing options')
+    testing.add_argument(
         '-o', '--output-dir',
         type=str,
         metavar='DIRECTORY',
         default='.',
         help='name of the output directory for tournament TRF files (default is the current directory)'
     )
-    create.add_argument(
+    testing.add_argument(
+        '-p', '--players-file',
+        type=str,
+        metavar='PLAYERS.CSV',
+        default=DEFAULT_PLAYERS_FILE,
+        help=f'name of the players CSV file (default {DEFAULT_PLAYERS_FILE})'
+    )
+    testing.add_argument(
+        '-r', '--ratings-file',
+        type=str,
+        metavar='RATINGS.CSV',
+        default=DEFAULT_RATINGS_FILE,
+        help=f'name of the ratings CSV file (default {DEFAULT_RATINGS_FILE})'
+    )
+    testing.add_argument(
         '-t', '--tournament-file',
         type=str,
         metavar='TOURNAMENT.TRF',
