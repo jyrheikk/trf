@@ -1,5 +1,5 @@
 from trf.player import Player
-from trf.trf import create_groups
+from trf.trf import TournamentReportFile
 
 TOURNAMENT_INFO = '''012 Test {GROUP}
 022 Helsinki
@@ -37,5 +37,5 @@ def test_create_groups() -> None:
             'player_count': 2
         }
     ]
-    trf = create_groups(players, group_ends, TOURNAMENT_INFO)
-    assert trf == expected
+    trf = TournamentReportFile(players)
+    assert trf.create_groups(group_ends, TOURNAMENT_INFO) == expected
