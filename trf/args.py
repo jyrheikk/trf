@@ -88,8 +88,11 @@ def parse_args(argv = None) -> argparse.Namespace:
 def validate_args(args: argparse.Namespace) -> argparse.Namespace:
     if not args.download_ratings:
         assert_file(args.players_file)
+        if not args.exclude_ratings:
+            assert_file(args.ratings_file)
     if args.groups:
         assert_file(args.tournament_file)
+    return args
 
 def assert_file(filename: str) -> None:
     if filename:
