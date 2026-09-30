@@ -14,7 +14,7 @@
 - [Install `uv`](https://docs.astral.sh/uv/getting-started/installation/), used by the `trfx` script.
 - Add the `trfx` script in the `PATH`, or create an alias to it:
 ```
-alias trfx='<TRF-DIRECTORY>'
+alias trfx='<TRF-DIRECTORY>/trfx'
 ```
 
 > [!TIP]
