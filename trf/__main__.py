@@ -8,7 +8,7 @@ from trf.player import Player
 from trf.players_parser import PlayersParser
 from trf.rating_list import RatingList
 from trf.rating_list_parser import RatingListParser
-from trf.trf import create_players, create_trf
+from trf.trf import TournamentReportFile
 
 def main(args: argparse.Namespace) -> None:
     if args.download_ratings:
@@ -21,10 +21,11 @@ def handle_players(args: argparse.Namespace) -> None:
     players = get_players(args)
     if (args.groups):
         validate_groups(args, len(players))
-        create_trf(players, args.groups, args.tournament_file, args.output_dir)
+        trf = TournamentReportFile(players, args.exclude_ratings)
+        trf.create_tournament(args.groups, args.tournament_file, args.output_dir)
     else:
         check_valid_players(players, args)
-        list_players(players)
+        list_players(players, args)
 
 def get_players(args: argparse.Namespace) -> list[Player]:
     parser = PlayersParser()
@@ -44,9 +45,10 @@ def check_valid_players(players: list[Player], args: argparse.Namespace) -> None
         elif args.license and p.needs_license:
             warn(f'No license: {p.name_club}')
 
-def list_players(players: list[Player]) -> None:
-    trf = create_players(players, omit_id=True)
-    print('\n'.join(trf))
+def list_players(players: list[Player], args: argparse.Namespace) -> None:
+    trf = TournamentReportFile(players, args.exclude_ratings)
+    contents = trf.create_players(omit_id=True)
+    print('\n'.join(contents))
     last_group = len(players)
     first_group = last_group // 2
     info(f'Create TRF: add the last player index of each group (--groups {first_group} {last_group})')
