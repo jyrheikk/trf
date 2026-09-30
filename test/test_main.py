@@ -4,10 +4,8 @@ from trf.__main__ import main
 from trf.args import parse_args
 
 ARGS = [
-    '--players-file',
-    'test/data/test-players.csv',
-    '--ratings-file',
-    'test/data/test-ratings.csv',
+    *['--players-file', 'test/data/test-players.csv'],
+    *['--ratings-file', 'test/data/test-ratings.csv'],
     '--license'
 ]
 
@@ -29,9 +27,8 @@ def test_list_players(capsys: CaptureFixture[str]) -> None:
 
 def test_list_given_players(capsys: CaptureFixture[str]) -> None:
     args = [
-        '--find-players',
-        'Dyral,Dody,Int',
-        'Dzyura,Khristofor'
+        *['--ratings-file', 'test/data/test-ratings.csv'],
+        *['--find-players', 'Dyral,Dody,Int', 'Dzyura,Khristofor']
     ]
     main(parse_args(args))
     output = capsys.readouterr()
@@ -45,10 +42,9 @@ def test_list_given_players(capsys: CaptureFixture[str]) -> None:
 def test_create_tournament(capsys: CaptureFixture[str]) -> None:
     args = [
         *ARGS,
-        '--output-dir',
-        'test/data/output',
-        '--groups',
-        '2'
+        *['--tournament-file', 'samples/tournament.trf'],
+        *['--output-dir', 'test/data/output'],
+        *['--groups', '2']
     ]
     main(parse_args(args))
     output = capsys.readouterr()
