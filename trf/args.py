@@ -20,7 +20,7 @@ def parse_args(argv = None) -> argparse.Namespace:
     download.add_argument(
         '-d', '--download-ratings',
         action='store_true',
-        help='download the latest ratings file'
+        help='download the latest rating file'
     )
     download.add_argument(
         '-r', '--ratings-file',
@@ -34,7 +34,14 @@ def parse_args(argv = None) -> argparse.Namespace:
     players.add_argument(
         '-e', '--exclude-ratings',
         action='store_true',
-        help='skip searching players from the ratings file'
+        help='skip searching players from the rating file'
+    )
+    players.add_argument(
+        '-f', '--find-players',
+        type=str,
+        metavar='LAST,FIRST,CLUB',
+        nargs='*',
+        help='find the given players from the rating file'
     )
     players.add_argument(
         '-l', '--license',

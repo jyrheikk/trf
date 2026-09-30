@@ -28,7 +28,10 @@ def handle_players(args: argparse.Namespace) -> None:
 
 def get_players(args: argparse.Namespace) -> list[Player]:
     parser = PlayersParser()
-    participants = parser.parse(args.players_file, header=not args.no_header)
+    if args.find_players:
+        participants = parser.parse_players(args.find_players)
+    else:
+        participants = parser.parse_file(args.players_file, header=not args.no_header)
     if args.exclude_ratings:
         return participants
     rating_list = RatingList(args.ratings_file)
