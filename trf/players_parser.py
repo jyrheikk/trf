@@ -26,7 +26,8 @@ class PlayersParser:
 
     def parse(self, players: list[str]) -> list[Player]:
         result = []
-        for data in players:
+        for d in players:
+            data = [field.strip() for field in d]
             p = Player(
                 last_name=self.get_value(self.LAST_NAME, data),
                 first_name=self.get_value(self.FIRST_NAME, data),
