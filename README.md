@@ -22,7 +22,7 @@ alias trfx='<TRF-DIRECTORY>'
 
 ## Creating the input data
 
-Create a separate directory for the data files.
+Create a separate directory for the tournament files, and run the `trfx` command there.
 
 ### Create customized tournament information
 
