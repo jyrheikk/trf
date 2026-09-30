@@ -3,12 +3,9 @@ from pathlib import Path
 
 from trf.log import fatal
 
-INPUT_DIR = 'data/input'
-DEFAULT_TOURNAMENT_FILE = f'{INPUT_DIR}/tournament.trf'
-DEFAULT_PLAYERS_FILE = f'{INPUT_DIR}/players.csv'
-DEFAULT_RATINGS_FILE = f'{INPUT_DIR}/selolista.csv'
-
-DEFAULT_OUTPUT_DIR = 'data/output'
+DEFAULT_TOURNAMENT_FILE = 'tournament.trf'
+DEFAULT_PLAYERS_FILE = 'players.csv'
+DEFAULT_RATINGS_FILE = 'selolista.csv'
 
 def parse_args(argv = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -73,8 +70,8 @@ def parse_args(argv = None) -> argparse.Namespace:
         '-o', '--output-dir',
         type=str,
         metavar='DIRECTORY',
-        default=DEFAULT_OUTPUT_DIR,
-        help=f'name of the output directory for tournament TRF files (default {DEFAULT_OUTPUT_DIR})'
+        default='.',
+        help='name of the output directory for tournament TRF files (default is the current directory)'
     )
     create.add_argument(
         '-t', '--tournament-file',
@@ -87,10 +84,16 @@ def parse_args(argv = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 def validate_args(args: argparse.Namespace) -> argparse.Namespace:
-    for filename in [args.players_file, args.tournament_file]:
-        if filename:
-            assert_file(filename)
-    return args
+    if not args.download_ratings:
+        assert_file(args.players_file)
+    if args.groups:
+        assert_file(args.tournament_file)
+
+def assert_file(filename: str) -> None:
+    if filename:
+        file_path = Path(filename)
+        if not file_path.exists():
+            fatal(f'File not found: {filename}')
 
 def validate_groups(args: argparse.Namespace, count: int) -> None:
     sorted_arr = sorted(args.groups, key=int)
@@ -102,11 +105,6 @@ def validate_groups(args: argparse.Namespace, count: int) -> None:
         fatal(f'--groups option: the last number can not be > {count}')
     elif count not in args.groups:
         args.groups.append(count)
-
-def assert_file(filename: str) -> None:
-    file_path = Path(filename)
-    if not file_path.exists():
-        fatal(f'File not found: {filename}')
 
 def to_str(arr: list[int]) -> str:
     return ' '.join(map(str, arr))

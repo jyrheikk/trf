@@ -2,7 +2,6 @@ import urllib.request
 
 from trf.player import Player
 from trf.players_parser import PlayersParser
-from trf.trf import create_directory
 
 MAX_FREE_GAMES = 10
 
@@ -28,6 +27,5 @@ class RatingListParser(PlayersParser):
         url = 'https://www.shakki.net/selo/selolista.csv'
         with urllib.request.urlopen(url) as response:
             content = response.read().decode('windows-1252')
-        create_directory(ratings_file)
         with open(ratings_file, 'w', encoding='utf-8') as outfile:
             outfile.write(content.replace(APOSTROPHE, "'"))
