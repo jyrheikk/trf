@@ -39,7 +39,7 @@ def parse_args(argv = None) -> argparse.Namespace:
     players.add_argument(
         '-f', '--find-players',
         type=str,
-        metavar='LAST,FIRST,CLUB',
+        metavar='LAST,FIRST[,CLUB]',
         nargs='*',
         help='find the given players from the rating file'
     )

@@ -3,17 +3,6 @@ from pytest import CaptureFixture
 from trf.__main__ import main
 from trf.args import parse_args
 
-EXPECTED_LIST_OUTPUT = [
-    'No license: Casual, John (MatSK)',
-    'Is new player: Player, New',
-    '1      Heikkinen, Jyrki                  2047',
-    '2      Casual, John                      1558',
-    '3      Player, New                       1425',
-    "4      D'Amato, Carolina                 1409",
-    '5      Beginner, Real                    1298',
-    '(--groups 2 5)'
-]
-
 ARGS = [
     '--players-file',
     'test/data/test-players.csv',
@@ -25,7 +14,32 @@ ARGS = [
 def test_list_players(capsys: CaptureFixture[str]) -> None:
     main(parse_args(ARGS))
     output = capsys.readouterr()
-    for row in EXPECTED_LIST_OUTPUT:
+    expected = [
+        'No license: Casual, John (MatSK)',
+        'Is new player: Player, New',
+        '1      Heikkinen, Jyrki                  2047',
+        '2      Casual, John                      1558',
+        '3      Player, New                       1425',
+        "4      D'Amato, Carolina                 1409",
+        '5      Beginner, Real                    1298',
+        '(--groups 2 5)'
+    ]
+    for row in expected:
+        assert row in output.out
+
+def test_list_given_players(capsys: CaptureFixture[str]) -> None:
+    args = [
+        '--find-players',
+        'Dyral,Dody,Int',
+        'Dzyura,Khristofor'
+    ]
+    main(parse_args(args))
+    output = capsys.readouterr()
+    expected = [
+        '1      Dzyura, Khristofor                1602',
+        '2      Dyral, Dody                       1517'
+    ]
+    for row in expected:
         assert row in output.out
 
 def test_create_tournament(capsys: CaptureFixture[str]) -> None:
