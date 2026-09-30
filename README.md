@@ -12,16 +12,22 @@
 - Create an account in [ChessManager](https://chessmanager.com/).
 - Copy the code of this GitHub repository, select **Code – Download ZIP**.
 - [Install `uv`](https://docs.astral.sh/uv/getting-started/installation/), used by the `trfx` script.
+- Add the `trfx` script in the `PATH`, or create an alias to it:
+```
+alias trfx='<TRF-DIRECTORY>'
+```
 
 > [!TIP]
 > Install a browser add-on to show up-to-date results, say, [Easy Auto Refresh](https://chromewebstore.google.com/detail/easy-auto-refresh/aabcgdmkeabbnleenpncegpcngjpnjkc) for Chrome.
 
 ## Creating the input data
 
+Create a separate directory for the data files.
+
 ### Create customized tournament information
 
-- Create a file named `data/input/tournament.trf`.
-- Reuse the `data/samples/tournament.trf` template if needed.
+- Create a file named `tournament.trf`.
+- Reuse the [`samples/tournament.trf`](samples/tournament.trf) template if needed.
 
 Set at least the following tags:
 
@@ -47,15 +53,15 @@ See the [Tournament Report File format](https://github.com/echecsjs/trf/blob/mai
 
 ### Download the ratings
 
-Download the latest ratings (in the `data/input/selolista.csv` file):
+Download the latest ratings (in the `selolista.csv` file):
 
 ```bash
-./trfx --download
+trfx --download
 ```
 
 ### Create the list of participants
 
-The list (in the `data/input/players.csv` file) must include the following fields:
+The list of participants (in the `players.csv` file) must include the following fields:
 
 ```csv
 surname,first,club,initial rating
@@ -80,7 +86,7 @@ For example, if the participants are in Google Sheet,
 Verify that all the participants are found from the ratings list:
 
 ```bash
-./trfx
+trfx
 ```
 
 Warning is shown for each player who
@@ -96,18 +102,18 @@ Fix the participant data manually if needed.
 Generate TRFs, and divide the players into them:
 
 ```bash
-./trfx --groups 10 24 38
+trfx --groups 10 24 38
 ```
 
 The numbers after the `--groups` option are the **index of the last player** in each group.
 
-The files are created in the `data/output/tournament-*.trf` files.
+The files are created in the `tournament-*.trf` files.
 
 ### Create tournaments
 
 - Log in to ChessManager.
 - Select **New Tournament**.
-- Select **Import From File**, and choose a generated TRF file from the `data/output` directory.
+- Select **Import From File**, and choose a generated TRF file.
 
 Once the first round has started, add _Club_ for each player if needed.
 
@@ -121,5 +127,5 @@ After the tournaments have finished, export their results for rating calculation
 See the help for all options:
 
 ```bash
-./trfx --help
+trfx --help
 ```
