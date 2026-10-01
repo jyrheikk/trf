@@ -19,7 +19,7 @@ def test_list_players(capsys: CaptureFixture[str]) -> None:
         '2      Casual, John                      1558',
         '3      Player, New                       1425',
         "4      D'Amato, Carolina                 1409",
-        '5      Beginner, Real                    1298',
+        '5      Beginner-Novice Starter, Really L 1298',
         '(--groups 2 5)'
     ]
     for row in expected:
