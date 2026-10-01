@@ -58,7 +58,7 @@ class TournamentReportFile:
         return (
             f'{tag} {index:>4} '
             f'{SEX:<1}{TITLE:<3} '
-            f'{player.name:<33} {rating}'
+            f'{player.name[0:33]:<33} {rating}'
         )
 
     @staticmethod
