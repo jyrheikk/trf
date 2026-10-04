@@ -5,7 +5,7 @@ from trf.log import fatal
 
 DEFAULT_PLAYERS_FILE = 'players.csv'
 DEFAULT_RATINGS_FILE = 'selolista.csv'
-DEFAULT_TOURNAMENT_FILE = 'tournament.trf'
+DEFAULT_INFO_FILE = 'info.trf'
 
 def parse_args(argv = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -55,6 +55,13 @@ def parse_args(argv = None) -> argparse.Namespace:
 
     testing = parser.add_argument_group('testing options')
     testing.add_argument(
+        '-i', '--info-file',
+        type=str,
+        metavar='INFO.TRF',
+        default=DEFAULT_INFO_FILE,
+        help=f'name of the tournament information file (default {DEFAULT_INFO_FILE})'
+    )
+    testing.add_argument(
         '-o', '--output-dir',
         type=str,
         metavar='DIRECTORY',
@@ -75,13 +82,6 @@ def parse_args(argv = None) -> argparse.Namespace:
         default=DEFAULT_RATINGS_FILE,
         help=f'name of the ratings CSV file (default {DEFAULT_RATINGS_FILE})'
     )
-    testing.add_argument(
-        '-t', '--tournament-file',
-        type=str,
-        metavar='TOURNAMENT.TRF',
-        default=DEFAULT_TOURNAMENT_FILE,
-        help=f'name of the Tournament Report File (default {DEFAULT_TOURNAMENT_FILE})'
-    )
 
     return parser.parse_args(argv)
 
@@ -91,7 +91,7 @@ def validate_args(args: argparse.Namespace) -> argparse.Namespace:
         if not args.exclude_ratings:
             assert_file(args.ratings_file)
     if args.groups:
-        assert_file(args.tournament_file)
+        assert_file(args.info_file)
     return args
 
 def assert_file(filename: str) -> None:

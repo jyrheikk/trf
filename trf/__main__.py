@@ -22,7 +22,7 @@ def handle_players(args: argparse.Namespace) -> None:
     if (args.groups):
         validate_groups(args, len(players))
         trf = TournamentReportFile(players, args.exclude_ratings)
-        trf.create_tournament(args.groups, args.tournament_file, args.output_dir)
+        trf.create_tournament(args.groups, args.info_file, args.output_dir)
     else:
         check_valid_players(players, args)
         list_players(players, args)
