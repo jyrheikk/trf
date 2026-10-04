@@ -10,7 +10,8 @@ DEFAULT_INFO_FILE = 'info.trf'
 def parse_args(argv = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog='trf',
-        description='Create Tournament Report Files (TRF) for a chess tournament'
+        description='Create Tournament Report Files (TRF) for a chess tournament',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
 
     download = parser.add_argument_group('download ratings')
@@ -59,28 +60,28 @@ def parse_args(argv = None) -> argparse.Namespace:
         type=str,
         metavar='INFO.TRF',
         default=DEFAULT_INFO_FILE,
-        help=f'name of the tournament information file (default {DEFAULT_INFO_FILE})'
+        help='name of the tournament information file'
     )
     testing.add_argument(
         '-o', '--output-dir',
         type=str,
         metavar='DIRECTORY',
         default='.',
-        help='name of the output directory for tournament TRF files (default is the current directory)'
+        help='name of the output directory for tournament TRF files'
     )
     testing.add_argument(
         '-p', '--players-file',
         type=str,
         metavar='PLAYERS.CSV',
         default=DEFAULT_PLAYERS_FILE,
-        help=f'name of the players CSV file (default {DEFAULT_PLAYERS_FILE})'
+        help='name of the players CSV file'
     )
     testing.add_argument(
         '-r', '--ratings-file',
         type=str,
         metavar='RATINGS.CSV',
         default=DEFAULT_RATINGS_FILE,
-        help=f'name of the ratings CSV file (default {DEFAULT_RATINGS_FILE})'
+        help='name of the ratings CSV file'
     )
 
     return parser.parse_args(argv)
