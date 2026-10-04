@@ -107,7 +107,7 @@ trfx --groups 10 24 38
 
 The numbers after the `--groups` option are the **index of the last player** in each group.
 
-The files are created in the `tournament-*.trf` files.
+The files are created in the `import-*.trf` files.
 
 ### Create tournaments
 

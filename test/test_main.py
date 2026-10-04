@@ -49,8 +49,8 @@ def test_create_tournament(capsys: CaptureFixture[str]) -> None:
     main(parse_args(args))
     output = capsys.readouterr()
     expected = [
-        'Created test/data/output/tournament-A.trf (2 players)',
-        'Created test/data/output/tournament-B.trf (3 players)'
+        'Created test/data/output/import-A.trf (2 players)',
+        'Created test/data/output/import-B.trf (3 players)'
     ]
     for row in expected:
         assert row in output.out

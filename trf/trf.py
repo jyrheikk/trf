@@ -20,7 +20,7 @@ class TournamentReportFile:
             tournament_info = file.read()
         groups = self.create_groups(group_ends, tournament_info)
         for i, group in enumerate(groups):
-            filename = f'{output_dir}/tournament-{ASCII[i]}.trf'
+            filename = f'{output_dir}/import-{ASCII[i]}.trf'
             if i == 0:
                 self.create_directory(filename)
             with open(filename, 'w', encoding='utf-8') as outfile:
