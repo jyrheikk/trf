@@ -19,7 +19,7 @@ alias trfx='<TRF-DIRECTORY>/trfx'
 
 > [!TIP]
 > Install a browser add-on to show up-to-date results by
-> - rotating the tabs if the tournament contains several groups, and
+> - rotating the tabs (if the tournament includes several groups), and
 > - refreshing the pages automatically.
 
 ## Creating the input data
