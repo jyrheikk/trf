@@ -42,7 +42,7 @@ def test_list_given_players(capsys: CaptureFixture[str]) -> None:
 def test_create_tournament(capsys: CaptureFixture[str]) -> None:
     args = [
         *ARGS,
-        *['--tournament-file', 'samples/tournament.trf'],
+        *['--info-file', 'samples/classical-info.trf'],
         *['--output-dir', 'test/data/output'],
         *['--groups', '2']
     ]

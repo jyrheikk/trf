@@ -35,7 +35,7 @@ def test_validate_args_create_tournament_succeeds(capsys: CaptureFixture[str]) -
     assert_args_ok(
         capsys,
         [
-            *['--tournament-file', 'samples/tournament.trf'],
+            *['--info-file', 'samples/classical-info.trf'],
             *['--players-file', 'test/data/test-players.csv'],
             *['--ratings-file', 'test/data/test-ratings.csv'],
             *['--groups', '16', '32'],
