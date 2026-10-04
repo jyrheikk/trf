@@ -15,8 +15,8 @@ class TournamentReportFile:
         self.players = players
         self.exclude_ratings = exclude_ratings
 
-    def create_tournament(self, group_ends: list[int], tournament: str, output_dir: str) -> None:
-        with open(tournament) as file:
+    def create_tournament(self, group_ends: list[int], info_file: str, output_dir: str) -> None:
+        with open(info_file) as file:
             tournament_info = file.read()
         groups = self.create_groups(group_ends, tournament_info)
         for i, group in enumerate(groups):
