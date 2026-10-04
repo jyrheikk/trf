@@ -27,7 +27,7 @@ Create a separate directory for the tournament files, and run the `trfx` command
 ### Create customized tournament information
 
 - Create a file named `tournament.trf`.
-- Reuse the [`samples/tournament.trf`](samples/tournament.trf) template if needed.
+- Reuse some of the [`samples`](samples/) templates.
 
 Set at least the following tags:
 
@@ -114,8 +114,6 @@ The files are created in the `tournament-*.trf` files.
 - Log in to ChessManager.
 - Select **New Tournament**.
 - Select **Import From File**, and choose a generated TRF file.
-
-Once the first round has started, add _Club_ for each player if needed.
 
 ### Export results
 
