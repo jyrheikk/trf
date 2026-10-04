@@ -18,7 +18,9 @@ alias trfx='<TRF-DIRECTORY>/trfx'
 ```
 
 > [!TIP]
-> Install a browser add-on to show up-to-date results, say, [Easy Auto Refresh](https://chromewebstore.google.com/detail/easy-auto-refresh/aabcgdmkeabbnleenpncegpcngjpnjkc) for Chrome.
+> Install a browser add-on to show up-to-date results by
+> - rotating the tabs if the tournament contains several groups, and
+> - refreshing the pages automatically.
 
 ## Creating the input data
 
@@ -81,7 +83,7 @@ Set the initial rating for a new player if needed. In Finland, it is
 
 For example, if the participants are in Google Sheet,
 - export them as CSV, and
-- verify that the order of fields is correct.
+- ensure that the order of fields is correct.
 
 Verify that all the participants are found from the ratings list:
 
